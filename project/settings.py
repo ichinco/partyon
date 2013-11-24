@@ -39,6 +39,7 @@ INSTALLED_APPS = (
 
     # external packages
     'south',
+    'bootstrap3',
 
     # our apps
     'apps.partyon'
