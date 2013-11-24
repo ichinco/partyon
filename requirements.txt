@@ -1,5 +1,4 @@
 Django==1.6
 South==0.8.4
-distribute==0.7.3
 django-toolbelt==0.0.1
 gunicorn==18.0
