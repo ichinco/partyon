@@ -1,5 +1,21 @@
 Django==1.6
+GnuPGInterface==0.3.2
 South==0.8.4
-distribute==0.7.3
+apt-xapian-index==0.44
+argparse==1.2.1
+chardet==2.0.1
+command-not-found==0.2.44
+## FIXME: could not find svn URL in dependency_links for this package:
+distribute==0.6.24dev-r0
+dj-database-url==0.2.2
+dj-static==0.0.5
 django-toolbelt==0.0.1
+gunicorn==18.0
+language-selector==0.1
+psycopg2==2.5.1
+python-apt==0.8.3ubuntu7
+python-debian==0.1.21ubuntu1
+static==0.4
+ufw==0.31.1-1
+virtualenv==1.10.1
 wsgiref==0.1.2
