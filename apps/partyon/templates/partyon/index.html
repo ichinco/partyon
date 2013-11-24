@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
+
 
 
 {% block content %}
@@ -8,16 +10,69 @@
   <li><a href="#">Partiers</a></li>
   <li><a href="#">Food</a></li>
   <li><a href="#">Money</a></li>
+  <li><a href="#">Polls</a></li>
+  <li><a href="#">Locations</a></li>
 </ul>
-<div class="row">
-    <button type="button" class="btn btn-default btn-lg col-md-2">Upload photo</button>
-    <button type="button" class="btn btn-default btn-lg col-md-2">Manage Guests</button>
-    <button type="button" class="btn btn-default btn-lg col-md-2">Add activities</button>
+<div class="organizer">
+    <div class="row">
+        <button type="button" class="btn btn-default btn-lg col-md-2 disabled">Upload photo</button>
+        <button type="button" class="btn btn-default btn-lg col-md-2" data-toggle="modal" data-target="#add-guests">Manage Guests</button>
+        <button type="button" class="btn btn-default btn-lg col-md-2 disabled">Add activities</button>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-default btn-lg col-md-2 disabled">Payments</button>
+        <button type="button" class="btn btn-default btn-lg col-md-2 disabled">Polls</button>
+        <button type="button" class="btn btn-default btn-lg col-md-2 disabled">Vendors</button>
+    </div>
 </div>
-<div class="row">
-    <button type="button" class="btn btn-default btn-lg col-md-2">Payments</button>
-    <button type="button" class="btn btn-default btn-lg col-md-2">Polls</button>
-    <button type="button" class="btn btn-default btn-lg col-md-2">Vendors</button>
+<div id="add-guests" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Add guests</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td>
+                            <input type="text" />
+                        </td>
+                        <td>
+                            <input type="text" />
+                        </td>
+                        <td>
+                            <input type="text" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" />
+                        </td>
+                        <td>
+                            <input type="text" />
+                        </td>
+                        <td>
+                            <input type="text" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-lg">Save</button>
+                <button type="button" class="btn btn-default btn-lg">Email All</button>
+            </div>
+        </div>
+    </div>
+
 </div>
+    {% bootstrap_javascript jquery=True %}
 {% endblock %}
 
