@@ -140,11 +140,13 @@
               keyboard: false,
               show: false
             });
-            $(".draggable").draggable();
+            $(".draggable").draggable({
+                revert : true
+            });
 
             $( ".droppable" ).droppable({
               drop: function( event, ui ) {
-                  ui.draggable.removeAttr("style");
+{#                  ui.draggable.removeAttr("style");#}
                   $(this).find(".desc").html(ui.draggable.html());
                   $("#create-event").find(".modal-title").html(ui.draggable.html());
                   $("#create-event").modal('show');
