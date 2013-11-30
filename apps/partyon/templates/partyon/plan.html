@@ -110,17 +110,46 @@
         </div>
         {% endfor %}
     </div>
+
+    <div id="create-event" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+                <label for="details">details</label>
+                <input type="textarea" name="details" />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
 {% endblock %}
 
 {% block javascript %}
     <script type="text/javascript">
-        $(".draggable").draggable();
+        $(document).ready(function() {
+            $('.modal').modal({
+              keyboard: false,
+              show: false
+            });
+            $(".draggable").draggable();
 
-        $( ".droppable" ).droppable({
-          drop: function( event, ui ) {
-              ui.draggable.removeAttr("style");
-              $(this).find(".desc").html(ui.draggable.html());
-          }
+            $( ".droppable" ).droppable({
+              drop: function( event, ui ) {
+                  ui.draggable.removeAttr("style");
+                  $(this).find(".desc").html(ui.draggable.html());
+                  $("#create-event").find(".modal-title").html(ui.draggable.html());
+                  $("#create-event").modal('show');
+              }
+            });
         });
     </script>
 {% endblock %}
