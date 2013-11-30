@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap3 %}
 {% load apptag %}
-
 
 {% block content %}
     <div class="row">
@@ -14,11 +12,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr><td>Breakfast</td></tr>
-                <tr><td>Brunch</td></tr>
-                <tr><td>Lunch</td></tr>
-                <tr><td>Dinner</td></tr>
-                <tr><td>Drinks</td></tr>
+                <tr><td class="draggable">Breakfast</td></tr>
+                <tr><td class="draggable">Brunch</td></tr>
+                <tr><td class="draggable">Lunch</td></tr>
+                <tr><td class="draggable">Dinner</td></tr>
+                <tr><td class="draggable">Drinks</td></tr>
                 </tbody>
                 <thead>
                 <tr>
@@ -26,13 +24,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr><td>Walking tour</td></tr>
-                <tr><td>Hike</td></tr>
-                <tr><td>Spa</td></tr>
-                <tr><td>Sports game</td></tr>
-                <tr><td>Theater</td></tr>
-                <tr><td>Dancing</td></tr>
-                <tr><td>Beach</td></tr>
+                <tr><td class="draggable">Walking tour</td></tr>
+                <tr><td class="draggable">Hike</td></tr>
+                <tr><td class="draggable">Spa</td></tr>
+                <tr><td class="draggable">Sports game</td></tr>
+                <tr><td class="draggable">Theater</td></tr>
+                <tr><td class="draggable">Dancing</td></tr>
+                <tr><td class="draggable">Beach</td></tr>
                 </tbody>
             </table>
         </div>
@@ -73,5 +71,12 @@
         </div>
         {% endfor %}
     </div>
-    {% bootstrap_javascript jquery=True %}
+
+
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $(".draggable").draggable();
+    </script>
 {% endblock %}

@@ -39,7 +39,6 @@ INSTALLED_APPS = (
 
     # external packages
     'south',
-    'bootstrap3',
     'jquery',
 
     # our apps
