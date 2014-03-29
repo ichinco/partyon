@@ -1,6 +1,6 @@
 
 <div class="container">
-    <%= form_for :trip do |f| %>
+    <%= form_for :trip, url:trip_index_path do |f| %>
         <div class="form-group">
             <%= f.label "trip name" %>
             <%= f.text_field :title, class:"form-control" %>

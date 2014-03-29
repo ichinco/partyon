@@ -1,0 +1,8 @@
+
+<h1>My Trips</h1>
+<% @trips.each do |trip| %>
+    <div>
+        <h3><%= trip.title %></h3>
+        <div><%= trip.location %></div>
+    </div>
+<% end %>
