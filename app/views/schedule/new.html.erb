@@ -1,18 +1,20 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
-<h1><%= @activity.name %></h1>
-<%= form_for :schedule, url:trip_schedule_index_path(@trip) do |f| %>
-    <%= f.hidden_field :activity_id, value: @activity.id  %>
-    <div class="form-group">
-        <%= f.label "start time" %>
-        <%= f.select(:day, options_for_select((1 .. @trip.length).map do |day| ["day #{day}",day] end)) %>
-        <%= f.select(:start_hour, options_for_select((0 .. 23))) %>
-        <%= f.select(:start_minute, options_for_select([0, 15, 30, 45])) %>
-    </div>
-    <div>
-        <%= f.label "duration" %>
-        <%= f.text_field :duration %>
-    </div>
+<div class="container">
+    <h1><%= @activity.name %></h1>
+    <%= form_for :schedule, url:trip_schedule_index_path(@trip) do |f| %>
+        <%= f.hidden_field :activity_id, value: @activity.id  %>
+        <div class="form-group">
+            <%= f.label "start time" %>
+            <%= f.select(:day, options_for_select((1 .. @trip.length).map do |day| ["day #{day}",day] end)) %>
+            <%= f.select(:start_hour, options_for_select((0 .. 23))) %>
+            <%= f.select(:start_minute, options_for_select([0, 15, 30, 45])) %>
+        </div>
+        <div>
+            <%= f.label "duration" %>
+            <%= f.text_field :duration %>
+        </div>
 
-    <%= f.submit :submit, class:"btn btn-default" %>
-<% end %>
+        <%= f.submit :submit, class:"btn btn-default" %>
+    <% end %>
+</div>
