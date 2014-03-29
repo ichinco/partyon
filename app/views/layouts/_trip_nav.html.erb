@@ -1,4 +1,4 @@
-<div class="">
+<div class="bs-docks-sidebar">
     <ul class="nav nav-pills nav-stacked">
         <li class="<%= params[:controller] == "trip" ? "active" : "" %>"><%= link_to trip.title, trip_path(trip.id) %></li>
         <li class="<%= params[:controller] == "group" ? "active" : "" %>"><%= link_to "Group", trip_path(trip.id) %></li>

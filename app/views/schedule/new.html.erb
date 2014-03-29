@@ -1,0 +1,16 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<h1><%= @activity.name %></h1>
+<%= form_for :schedule, url:trip_schedule_index_path(@trip) do |f| %>
+    <%= f.hidden_field :activity_id, value: @activity.id  %>
+    <div class="form-group">
+        <%= f.label "start time" %>
+        <%= f.datetime_select :start_time %>
+    </div>
+    <div>
+        <%= f.label "end time" %>
+        <%= f.datetime_select :end_time %>
+    </div>
+
+    <%= f.submit :submit, class:"btn btn-default" %>
+<% end %>

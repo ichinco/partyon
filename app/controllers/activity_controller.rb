@@ -15,9 +15,9 @@ class ActivityController < ApplicationController
 
   def create
     @activity = Activity.new(activity_params)
-    @activity.trip_id = params[:trip_id]
+    @activity.trip = @trip
     if @activity.save
-      redirect_to trip_activity_path(params[:trip_id], @activity)
+      redirect_to trip_activity_path(@trip, @activity)
     else
       render "new"
     end
