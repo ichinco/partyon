@@ -6,7 +6,7 @@ class ScheduleController < ApplicationController
   end
 
   def index
-    @schedules = Schedule.where(:trip=>@trip)
+    @schedules = Schedule.where(:trip_id=>@trip.id)
     @schedule_hash = {}
     (1 .. @trip.length).each do |day|
       @schedule_hash[day] = {}
