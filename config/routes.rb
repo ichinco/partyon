@@ -14,6 +14,8 @@ Partyon::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  root 'trip#index'
+
   resources :trip do
     resources :activity
     resources :schedule
