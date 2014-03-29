@@ -10,11 +10,3 @@ class CreateSchedules < ActiveRecord::Migration
   end
 end
 
-def change
-  add_column :schedules, :day, :integer,
-  add_column :schedules, :start_hour, :integer,
-  add_column :schedules, :start_minute, :integer,
-  add_column :schedules, :duration, :integer,
-  remove_column :schedules, :start_time,
-  remove_column :schedules, :end_time
-end
