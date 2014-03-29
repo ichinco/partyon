@@ -28,7 +28,7 @@ class ScheduleController < ApplicationController
 
   def create
     @schedule = Schedule.new(schedule_params)
-    @schedule.trip = @trip
+    @schedule.trip_id = @trip.id
     if @schedule.save()
       redirect_to trip_schedule_index_path(@trip, @activity)
     else
