@@ -5,7 +5,13 @@
         <ul class="list-group">
             <li class="list-group-item">day <%= day %></li>
             <% (0 .. 23).each do |hour| %>
-                <li class="list-group-item"><%= hour %> <%= link_to "add activity", trip_activity_index_path(@trip) %></li>
+                <li class="list-group-item">
+                    <%= hour %>
+                    <% @schedule_hash[day][hour].each do |schedule| %>
+                        <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity) %>
+                    <% end %>
+                    <%= link_to "add activity", trip_activity_index_path(@trip) %>
+                </li>
             <% end %>
         </ul>
     <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140329152115) do
+ActiveRecord::Schema.define(version: 20140329213316) do
 
   create_table "activities", force: true do |t|
     t.string   "name"
@@ -25,15 +25,8 @@ ActiveRecord::Schema.define(version: 20140329152115) do
 
   add_index "activities", ["trip_id"], name: "index_activities_on_trip_id"
 
-  create_table "schedules", force: true do |t|
-    t.integer  "activity_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "schedules", ["activity_id"], name: "index_schedules_on_activity_id"
+# Could not dump table "schedules" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "trips", force: true do |t|
     t.string   "title"
