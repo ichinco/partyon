@@ -1,7 +1,7 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
 <div class="container">
-    <%= form_for :activity, url:trip_activity_index_path(@trip_id) do |f| %>
+    <%= form_for :activity, url:trip_activity_index_path(@trip) do |f| %>
         <div class="form-group">
             <%= f.label "activity name" %>
             <%= f.text_field :name, class:"form-control" %>

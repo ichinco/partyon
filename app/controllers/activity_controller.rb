@@ -7,7 +7,7 @@ class ActivityController < ApplicationController
   end
 
   def index
-    @activities = Activity.where(:trip_id=>@trip_id)
+    @activities = Activity.where(:trip_id=>@trip.id)
   end
 
   def new
@@ -15,7 +15,7 @@ class ActivityController < ApplicationController
 
   def create
     @activity = Activity.new(activity_params)
-    @activity.trip = @trip
+    @activity.trip_id = @trip.id
     if @activity.save
       redirect_to trip_activity_path(@trip, @activity)
     else
