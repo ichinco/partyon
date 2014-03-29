@@ -1,3 +1,4 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
 <h1><%= @activity.name %></h1>
+<%= link_to "add to schedule", new_trip_schedule_path(@trip,activity_id: @activity.id) %>
