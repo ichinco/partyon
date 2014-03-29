@@ -1,0 +1,8 @@
+<div class="">
+    <ul class="nav nav-pills nav-stacked">
+        <li class="<%= params[:controller] == "trip" ? "active" : "" %>"><%= link_to trip.title, trip_path(trip.id) %></li>
+        <li class="<%= params[:controller] == "group" ? "active" : "" %>"><%= link_to "Group", trip_path(trip.id) %></li>
+        <li class="<%= params[:controller] == "activity" ? "active" : "" %>"><%= link_to "Activities", trip_activity_index_path(trip.id) %></li>
+        <li class="<%= params[:controller] == "schedule" ? "active" : "" %>"><%= link_to "Schedule", trip_schedule_index_path(trip.id) %></li>
+    </ul>
+</div>

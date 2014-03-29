@@ -7,6 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">Party On!</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="push-right"><%= link_to "My Trips", trip_index_path %></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
 <%= yield %>
 

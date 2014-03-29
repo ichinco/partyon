@@ -2,7 +2,7 @@
 <h1>My Trips</h1>
 <% @trips.each do |trip| %>
     <div>
-        <h3><%= trip.title %></h3>
+        <h3><%= link_to trip.title, trip_path(trip) %></h3>
         <div><%= trip.location %></div>
     </div>
 <% end %>

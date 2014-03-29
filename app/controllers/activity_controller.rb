@@ -1,12 +1,16 @@
 class ActivityController < ApplicationController
 
+  before_action :get_trip
+
+  def get_trip
+    @trip = Trip.find(params[:trip_id])
+  end
+
   def index
-    @trip_id = params[:trip_id]
     @activities = Activity.where(:trip_id=>@trip_id)
   end
 
   def new
-    @trip_id = params[:trip_id]
   end
 
   def create
