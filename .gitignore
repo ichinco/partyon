@@ -8,3 +8,4 @@ venv
 *.iml
 *.ipr
 *.iws
+tmp/*

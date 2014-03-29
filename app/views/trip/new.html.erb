@@ -1,0 +1,19 @@
+
+<div class="container">
+    <%= form_for :trip do |f| %>
+        <div class="form-group">
+            <%= f.label "trip name" %>
+            <%= f.text_field :title, class:"form-control" %>
+        </div>
+        <div class="form-group">
+            <%= f.label "# of days" %>
+            <%= f.text_field :length, class:"form-control" %>
+        </div>
+        <div class="form-group">
+            <%= f.label "location" %>
+            <%= f.text_field :location, class:"form-control" %>
+        </div>
+
+        <%= f.submit :submit, class:"btn btn-default" %>
+    <% end %>
+</div>
