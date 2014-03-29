@@ -1,8 +1,10 @@
 
-<h1>My Trips</h1> <%= link_to "create new", new_trip_path %>
-<% @trips.each do |trip| %>
-    <div>
-        <h3><%= link_to trip.title, trip_path(trip) %></h3>
-        <div><%= trip.location %></div>
-    </div>
-<% end %>
+<div class="container">
+    <h1>My Trips</h1> <%= link_to "create new", new_trip_path %>
+    <% @trips.each do |trip| %>
+        <div>
+            <h3><%= link_to trip.title, trip_path(trip) %></h3>
+            <div><%= trip.location %></div>
+        </div>
+    <% end %>
+</div>

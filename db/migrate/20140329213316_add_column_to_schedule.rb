@@ -1,5 +1,5 @@
 class AddColumnToSchedule < ActiveRecord::Migration
   def change
-    add_column :schedules, :trip, :reference
+    add_reference :activities, :trip, index: true
   end
 end
