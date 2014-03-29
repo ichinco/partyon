@@ -1,0 +1,16 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <%= form_for :group_user, url:trip_group_index_path(@trip) do |f| %>
+        <div class="form-group">
+            <%= f.label "email" %>
+            <%= f.text_field :email, class:"form-control" %>
+        </div>
+        <div class="form-group">
+            <%= f.label "name" %>
+            <%= f.text_field :name, class:"form-control" %>
+        </div>
+
+        <%= f.submit :submit, class:"btn btn-default" %>
+    <% end %>
+</div>

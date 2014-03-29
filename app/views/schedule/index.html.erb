@@ -2,13 +2,13 @@
 
 <div class="container">
     <% (1 .. @trip.length).each do |day| %>
-        <ul class="list-group">
+        <ul class="list-group schedule-day">
             <li class="list-group-item">day <%= day %></li>
             <% (0 .. 23).each do |hour| %>
-                <li class="list-group-item">
+                <li class="list-group-item schedule-hour">
                     <%= hour %>
                     <% @schedule_hash[day][hour].each do |schedule| %>
-                        <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity) %>
+                        <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity), html_options={class:"btn btn-primary btn-sm"} %>
                     <% end %>
                     <%= link_to "add activity", trip_activity_index_path(@trip) %>
                 </li>

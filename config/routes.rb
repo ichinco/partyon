@@ -17,6 +17,7 @@ Partyon::Application.routes.draw do
   resources :trip do
     resources :activity
     resources :schedule
+    resources :group
   end
 
   # Example resource route with options:

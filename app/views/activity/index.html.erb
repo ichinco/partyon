@@ -1,9 +1,12 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
-<% @activities.each do |activity| %>
+<div class="container">
+    <%= link_to "add activity", new_trip_activity_path(@trip) %>
+    <% @activities.each do |activity| %>
 
-    <div>
-        <%= link_to activity.name, trip_activity_path(@trip, activity) %>
-        <%= link_to "add to schedule", new_trip_schedule_path(@trip,activity_id: activity.id) %>
-    </div>
-<% end %>
+        <div>
+            <%= link_to activity.name, trip_activity_path(@trip, activity) %>
+            <%= link_to "add to schedule", new_trip_schedule_path(@trip,activity_id: activity.id) %>
+        </div>
+    <% end %>
+</div>
