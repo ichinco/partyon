@@ -1,5 +1,5 @@
 
-<h1>My Trips</h1>
+<h1>My Trips</h1> <%= link_to "create new", new_trip_path %>
 <% @trips.each do |trip| %>
     <div>
         <h3><%= link_to trip.title, trip_path(trip) %></h3>
