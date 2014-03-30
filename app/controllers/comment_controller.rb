@@ -1,4 +1,5 @@
 class CommentController < ApplicationController
+  before_action :authenticate_user!
 
   def create
     trip_id = params[:trip_id]
