@@ -8,7 +8,7 @@
             <%= f.label "start time" %>
             <%= f.select(:day, options_for_select((1 .. @trip.length).map do |day| ["day #{day}",day] end)) %>
             <%= f.select(:start_hour, options_for_select((0 .. 23))) %>
-            <%= f.select(:start_minute, options_for_select([0, 15, 30, 45])) %>
+            <%= f.select(:start_minute, options_for_select([00, 15, 30, 45])) %>
         </div>
         <div>
             <%= f.label "duration" %>

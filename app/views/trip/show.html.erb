@@ -2,4 +2,14 @@
 
 <div class="container">
     <h1><%= @trip.title %> <span><%= @trip.location %></span></h1>
+
+    <ul>
+        <% @schedules.each do |schedule| %>
+            <li>
+                day <%= schedule.day %>
+                @ <%=schedule.start_hour%>:<%=schedule.start_minute%>
+                <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity) %>
+            </li>
+        <% end %>
+    </ul>
 </div>
