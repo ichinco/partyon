@@ -3,4 +3,19 @@
 <div class="container">
     <h1><%= @activity.name %></h1>
     <%= link_to "add to schedule", new_trip_schedule_path(@trip,activity_id: @activity.id) %>
+
+    <div class="comments">
+        <% @comments.each do |comment| %>
+            <div class="comment">
+                <div class="text">
+                    <%= comment.text %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
+    <%= form_for :comment, url:trip_activity_comment_index_path(@trip, @activity) do |f| %>
+        <%= f.text_area :text, class:"form-control" %>
+        <%= f.submit "comment", class:"btn btn-default" %>
+    <% end %>
 </div>

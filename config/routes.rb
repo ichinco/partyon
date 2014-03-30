@@ -17,7 +17,9 @@ Partyon::Application.routes.draw do
   root 'trip#index'
 
   resources :trip do
-    resources :activity
+    resources :activity do
+      resources :comment
+    end
     resources :schedule
     resources :group
   end

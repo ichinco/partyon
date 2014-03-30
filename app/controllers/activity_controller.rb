@@ -24,7 +24,9 @@ class ActivityController < ApplicationController
   end
 
   def show
-    @activity = Activity.find(params[:id])
+    activity_id = params[:id]
+    @activity = Activity.find(activity_id)
+    @comments = Comment.where(:activity_id=>activity_id).order(:created_at)
   end
 
   private
