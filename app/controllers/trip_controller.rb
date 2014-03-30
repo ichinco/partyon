@@ -2,12 +2,19 @@ class TripController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @trips = Trip.all
+    @trips = TripUser.where(:user_id => current_user.id).map do |tu|
+      tu.trip
+    end
   end
 
   def create
     @trip = Trip.new(trip_parameters)
     if @trip.save()
+      @trip_user = TripUser.new()
+      @trip_user.trip = @trip
+      @trip_user.user = current_user
+      @trip_user.role = "planner"
+      @trip_user.save()
       redirect_to trip_path(@trip)
     else
       render 'new'

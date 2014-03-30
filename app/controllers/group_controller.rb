@@ -21,6 +21,7 @@ class GroupController < ApplicationController
 
     @trip_user.trip = @trip
     @trip_user.user = @user
+    @trip_user.role = "guest"
 
     if @trip_user.save
       redirect_to trip_group_index_path(@trip)
