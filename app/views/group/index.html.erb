@@ -2,4 +2,9 @@
 
 <div class="container">
     <%= link_to "add new participant", new_trip_group_path(@trip) %>
+    <ul>
+        <% @users.each do |user| %>
+            <li><%= user.user.email %></li>
+        <% end %>
+    </ul>
 </div>
