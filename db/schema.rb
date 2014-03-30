@@ -32,10 +32,21 @@ ActiveRecord::Schema.define(version: 20140330011434) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["activity_id"], name: "index_comments_on_activity_id_id"
+  add_index "comments", ["activity_id"], name: "index_comments_on_activity_id"
 
-# Could not dump table "schedules" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "schedules", force: true do |t|
+    t.integer  "activity_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "day"
+    t.integer  "duration"
+    t.integer  "start_hour"
+    t.integer  "start_minute"
+    t.integer  "trip_id"
+  end
+
+  add_index "schedules", ["activity_id"], name: "index_schedules_on_activity_id"
+  add_index "schedules", ["trip_id"], name: "index_schedules_on_trip_id"
 
   create_table "trips", force: true do |t|
     t.string   "title"
