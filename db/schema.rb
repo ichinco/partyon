@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20140330023950) do
     t.string   "name"
     t.string   "website"
     t.integer  "cost"
-    t.string   "type"
+    t.string   "activity_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "trip_id"

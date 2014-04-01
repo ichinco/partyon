@@ -10,7 +10,7 @@
                     <% @schedule_hash[day][hour].each do |schedule| %>
                         <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity), html_options={class:"btn btn-primary btn-sm"} %>
                     <% end %>
-                    <%= link_to "add activity", trip_activity_index_path(@trip) %>
+                    <%= link_to "", trip_activity_index_path(@trip), html_options={class:"btn glyphicon glyphicon-plus pull-right"} %>
                 </li>
             <% end %>
         </ul>

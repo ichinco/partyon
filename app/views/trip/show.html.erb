@@ -1,7 +1,7 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
 <div class="container">
-    <h1><%= @trip.title %> <span><%= @trip.location %></span></h1>
+    <h1><%= @trip.title %> <small><%= @trip.location %></small></h1>
 
     <ul>
         <% @schedules.each do |schedule| %>

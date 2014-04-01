@@ -4,7 +4,7 @@ class CreateActivities < ActiveRecord::Migration
       t.string :name
       t.string :website
       t.integer :cost
-      t.string :type
+      t.string :activity_type
 
       t.timestamps
     end

@@ -1,7 +1,8 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
 <div class="container">
-    <%= link_to "add new participant", new_trip_group_path(@trip) %>
+    <h1>Trip participants</h1>
+    <%= link_to "add new participant", new_trip_group_path(@trip), class:"btn btn-primary" %>
     <ul>
         <% @users.each do |user| %>
             <li><%= user.user.email %></li>

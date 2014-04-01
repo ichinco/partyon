@@ -1,12 +1,15 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
 <div class="container">
-    <%= link_to "add activity", new_trip_activity_path(@trip) %>
-    <% @activities.each do |activity| %>
+    <h1>Activities</h1>
+    <%= link_to "add activity", new_trip_activity_path(@trip), html_options={class:"btn btn-primary"} %>
 
-        <div>
-            <%= link_to activity.name, trip_activity_path(@trip, activity) %>
-            <%= link_to "add to schedule", new_trip_schedule_path(@trip,activity_id: activity.id) %>
-        </div>
-    <% end %>
+    <div>
+        <% @activities.each do |activity| %>
+            <div>
+                <%= link_to activity.name, trip_activity_path(@trip, activity) %>
+                <%= link_to "", new_trip_schedule_path(@trip,activity_id: activity.id), html_options={class:"btn glyphicon glyphicon-plus"} %>
+            </div>
+        <% end %>
+    </div>
 </div>
