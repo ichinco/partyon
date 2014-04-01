@@ -27,6 +27,7 @@ class ActivityController < ApplicationController
     activity_id = params[:id]
     @activity = Activity.find(activity_id)
     @comments = Comment.where(:activity_id=>activity_id).order(:created_at)
+    @schedules = Schedule.where(:activity_id=>activity_id).order(:day, :start_hour, :start_minute)
   end
 
   private

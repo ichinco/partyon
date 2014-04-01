@@ -35,10 +35,17 @@ class ScheduleController < ApplicationController
     @schedule.start_minute = @start_time.min
     @schedule.trip_id = @trip.id
     if @schedule.save()
-      redirect_to trip_schedule_index_path(@trip, @activity)
+      redirect_to trip_schedule_index_path(@trip)
     else
       redirect_to "new"
     end
+  end
+
+  def destroy
+    @schedule = Schedule.find(params[:id])
+    @activity = @schedule.activity
+    @schedule.destroy
+    redirect_to trip_activity_path(@trip, @activity)
   end
 
   private
