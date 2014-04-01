@@ -52,3 +52,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
+
+gem 'bootstrap-timepicker-rails'

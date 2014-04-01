@@ -1,3 +1,4 @@
+require 'time'
 class ScheduleController < ApplicationController
   before_action :get_trip
   before_action :authenticate_user!
@@ -28,7 +29,10 @@ class ScheduleController < ApplicationController
   end
 
   def create
+    @start_time = Time.parse(params[:start_time])
     @schedule = Schedule.new(schedule_params)
+    @schedule.start_hour = @start_time.hour
+    @schedule.start_minute = @start_time.min
     @schedule.trip_id = @trip.id
     if @schedule.save()
       redirect_to trip_schedule_index_path(@trip, @activity)
@@ -39,7 +43,7 @@ class ScheduleController < ApplicationController
 
   private
   def schedule_params
-    params.require(:schedule).permit(:activity_id, :day, :duration, :start_hour, :start_minute)
+    params.require(:schedule).permit(:activity_id, :day, :duration)
   end
 
 end
