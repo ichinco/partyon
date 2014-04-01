@@ -2,7 +2,7 @@ class TripController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @trips = TripUser.where(:user_id => current_user.id).map do |tu|
+    @trips = TripUser.where(:user_id => current_user.id).order(created_at: :desc).map do |tu|
       tu.trip
     end
   end
