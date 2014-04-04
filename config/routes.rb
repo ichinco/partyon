@@ -23,6 +23,7 @@ Partyon::Application.routes.draw do
     end
     resources :schedule
     resources :group
+    resources :cost
   end
 
   # Example resource route with options:

@@ -16,7 +16,11 @@ class GroupController < ApplicationController
     if @user.nil?
       @user = User.new()
       @user.email = group_params[:email]
-      @user.save
+      @user.password = "none1111"
+      unless @user.save
+        render 'new'
+        return
+      end
     end
 
     @trip_user.trip = @trip

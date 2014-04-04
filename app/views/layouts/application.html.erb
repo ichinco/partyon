@@ -24,6 +24,7 @@
                 <ul class="nav navbar-nav pull-right">
                     <% if user_signed_in? %>
                         <li><%= link_to "My Trips", trip_index_path %></li>
+                        <li><%= link_to "My Profile", edit_user_registration_path %></li>
                         <li><%= link_to "Sign out", destroy_user_session_path %></li>
                     <% else %>
                         <li><%= link_to "Sign up", new_user_registration_path %></li>
