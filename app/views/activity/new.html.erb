@@ -4,7 +4,7 @@
     <%= form_for :activity, url:trip_activity_index_path(@trip) do |f| %>
         <div class="form-group">
             <%= f.label "activity name" %>
-            <%= f.text_field :name, class:"form-control" %>
+            <%= f.text_field :name, class:"form-control", placeholder:"e.g., Lunch" %>
         </div>
         <div class="form-group">
             <%= f.label "website" %>
@@ -12,7 +12,11 @@
         </div>
         <div class="form-group">
             <%= f.label "cost" %>
-            <%= f.text_field :cost, class:"form-control" %>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <%= f.text_field :cost, class:"form-control", placeholder:"0.00" %>
+            </div>
+
         </div>
         <div class="form-group">
             <%= f.label "type" %>

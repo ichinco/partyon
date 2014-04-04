@@ -1,18 +1,36 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
 <div class="container">
-    <% (1 .. @trip.length).each do |day| %>
-        <ul class="list-group schedule-day">
-            <li class="list-group-item">day <%= day %></li>
-            <% (0 .. 23).each do |hour| %>
-                <li class="list-group-item schedule-hour">
-                    <%= hour %>
-                    <% @schedule_hash[day][hour].each do |schedule| %>
-                        <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity), html_options={class:"btn btn-primary btn-sm"} %>
-                    <% end %>
-                    <%= link_to "", trip_activity_index_path(@trip), html_options={class:"btn glyphicon glyphicon-plus pull-right"} %>
-                </li>
-            <% end %>
-        </ul>
-    <% end %>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+          <% (0 ... @trip.length).each do |day| %>
+              <li data-target="#carousel-example-generic <%= 1 == day ? "active" : "" %>" data-slide-to="<%= day %>"></li>
+          <% end %>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+          <% (1 .. @trip.length).each do |day| %>
+              <div class="item <%= 1 == day ? "active" : "" %>">
+                  <div class="carousel-item">
+                      <h3>day <%= day %></h3>
+                      <% @schedule_hash[day].each do |schedule| %>
+                          <%= get_time(schedule).strftime "%H:%M" %>
+                          <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity) %>
+                      <% end %>
+                  </div>
+              </div>
+          <% end %>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+
 </div>

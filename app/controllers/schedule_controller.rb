@@ -8,17 +8,14 @@ class ScheduleController < ApplicationController
   end
 
   def index
-    @schedules = Schedule.where(:trip_id=>@trip.id)
+    @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_hour, :start_minute)
     @schedule_hash = {}
     (1 .. @trip.length).each do |day|
-      @schedule_hash[day] = {}
-      (0 .. 23).each do |hour|
-        @schedule_hash[day][hour] = []
-      end
+      @schedule_hash[day] = []
     end
 
     @schedules.each do |schedule|
-      @schedule_hash[schedule.day][schedule.start_hour].append(schedule)
+      @schedule_hash[schedule.day].append(schedule)
     end
 
     @schedule_hash
