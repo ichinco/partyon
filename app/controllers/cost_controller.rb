@@ -18,6 +18,14 @@ class CostController < ApplicationController
 
   def index
     @costs = Cost.where(trip_id: @trip.id)
+    @total = @costs.inject(0) do |sum, cost|
+      if cost.actual_amount.nil?
+        sum + cost.estimated_amount
+      else
+        sum + cost.actual_amount
+      end
+    end
+
   end
 
   private
