@@ -2,9 +2,15 @@
 
 <div class="container">
     <%= form_for @activity, url:trip_activity_index_path(@trip) do |f| %>
-        <div class="form-group">
-            <%= f.label "activity name" %>
+        <div class="form-group <%= @activity.errors[:name].present? ? "has-error" : "" %>">
+            <%= f.label "activity name*" %>
+            <i><%= @activity.errors[:name][0] %></i>
             <%= f.text_field :name, class:"form-control", placeholder:"e.g., Lunch" %>
+        </div>
+        <div class="form-group <%= @activity.errors[:location].present? ? "has-error" : "" %>">
+            <%= f.label "location*" %>
+            <i><%= @activity.errors[:location][0] %></i>
+            <%= f.text_field :location, class:"form-control", placeholder:"e.g., Charlie's Bar" %>
         </div>
         <div class="form-group">
             <%= f.label "website" %>
@@ -17,8 +23,9 @@
         </div>
         <%= f.fields_for :costs do |builder| %>
             <%= builder.hidden_field :trip_id, value: @trip.id %>
-            <div class="form-group">
+            <div class="form-group <%= @activity.costs[0].errors[:estimated_amount].present? ? "has-error" : "" %>">
                 <%= builder.label "cost" %>
+                <i><%= @activity.costs[0].errors[:estimated_amount][0] %></i>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
                     <%= builder.text_field :estimated_amount, class:"form-control", placeholder:"0.00" %>
@@ -31,7 +38,7 @@
                 <%= builder.label "day" %>
                 <%= builder.select(:day, options_for_select((1 .. @trip.length).map do |day|
                   ["day #{day}", day]
-                end), {}, class: "form-control") %>
+                end), {:include_blank => true, :default => nil}, class: "form-control") %>
             </div>
         <% end %>
 

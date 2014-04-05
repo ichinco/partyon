@@ -1,4 +1,6 @@
 class ActivityController < ApplicationController
+  include ActionView::Helpers::TextHelper
+
   before_action :authenticate_user!
   before_action :get_trip
 
@@ -22,7 +24,8 @@ class ActivityController < ApplicationController
     if @activity.save
       redirect_to trip_activity_path(@trip, @activity)
     else
-      render "new"
+      flash[:alert] = "#{pluralize(@activity.errors.count,"error")} prevented this activity from being created."
+      render 'new'
     end
   end
 
