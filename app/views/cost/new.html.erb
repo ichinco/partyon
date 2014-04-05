@@ -1,0 +1,22 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <h1>Add Cost</h1>
+
+    <%= form_for :cost, url:trip_cost_index_path(@trip) do |f| %>
+        <div class="form-group">
+            <%= f.label "description" %>
+            <%= f.text_field :description, class:"form-control", placeholder:"e.g., flight" %>
+        </div>
+        <div class="form-group">
+            <%= f.label "actual amount" %>
+            <div class="input-group">
+                <span class="input-group-addon">$</span>
+                <%= f.text_field :actual_amount, class:"form-control", placeholder:"0.00" %>
+            </div>
+
+        </div>
+
+        <%= f.submit :submit, class:"btn btn-default" %>
+    <% end %>
+</div>
