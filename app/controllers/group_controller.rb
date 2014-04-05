@@ -10,6 +10,12 @@ class GroupController < ApplicationController
     @users = TripUser.where(:trip_id => @trip.id)
   end
 
+  def destroy
+    @trip_user = TripUser.find(params[:id])
+    @trip_user.destroy
+    redirect_to trip_group_index_path(@trip)
+  end
+
   def create
     @trip_user = TripUser.new()
     @user = User.where(:email=> group_params[:email]).first
@@ -34,8 +40,20 @@ class GroupController < ApplicationController
     end
   end
 
+  def update
+    @trip_user = TripUser.find(params[:id])
+    @trip_user.update(group_update_params)
+    @trip_user.save()
+    redirect_to trip_group_index_path(@trip)
+  end
+
   private
   def group_params
     params.require(:group_user).permit(:email, :name)
+  end
+
+  private
+  def group_update_params
+    params.require(:group_user).permit(:role)
   end
 end
