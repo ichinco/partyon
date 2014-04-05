@@ -15,10 +15,14 @@
               <div class="item <%= 1 == day ? "active" : "" %>">
                   <div class="carousel-item">
                       <h3>day <%= day %></h3>
-                      <% @schedule_hash[day].each do |schedule| %>
-                          <%= schedule.start_time.strftime "%H:%M" %>
-                          <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity) %>
-                      <% end %>
+                      <ol>
+                          <% @schedule_hash[day].each do |schedule| %>
+                              <li>
+                                  <%= schedule.start_time.strftime "%H:%M" %>
+                                  <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity) %>
+                              </li>
+                          <% end %>
+                      </ol>
                   </div>
               </div>
           <% end %>
