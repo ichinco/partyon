@@ -4,12 +4,14 @@
     <h1>Add Cost</h1>
 
     <%= form_for :cost, url:trip_cost_index_path(@trip) do |f| %>
-        <div class="form-group">
+        <div class="form-group <%= @cost.errors[:description].present? ? "has-error" : "" %>">
             <%= f.label "description" %>
+            <i><%= @cost.errors[:description][0] %></i>
             <%= f.text_field :description, class:"form-control", placeholder:"e.g., flight" %>
         </div>
-        <div class="form-group">
+        <div class="form-group <%= @cost.errors[:actual_amount].present? ? "has-error" : "" %>">
             <%= f.label "actual amount" %>
+            <i><%= @cost.errors[:actual_amount][0] %></i>
             <div class="input-group">
                 <span class="input-group-addon">$</span>
                 <%= f.text_field :actual_amount, class:"form-control", placeholder:"0.00" %>
