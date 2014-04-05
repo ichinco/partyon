@@ -1,5 +1,7 @@
 require 'time'
 class ScheduleController < ApplicationController
+  include ActionView::Helpers::TextHelper
+
   before_action :get_trip
   before_action :authenticate_user!
 
@@ -23,6 +25,7 @@ class ScheduleController < ApplicationController
 
   def new
     @activity = Activity.find(params[:activity_id])
+    @schedule = Schedule.new
   end
 
   def create
@@ -31,7 +34,9 @@ class ScheduleController < ApplicationController
     if @schedule.save()
       redirect_to trip_schedule_index_path(@trip)
     else
-      redirect_to "new"
+      @activity = @schedule.activity
+      flash[:alert] = "#{pluralize(@schedule.errors.count,"error")} prevented this schedule from being created."
+      render "new"
     end
   end
 

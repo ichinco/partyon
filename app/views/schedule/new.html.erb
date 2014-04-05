@@ -4,14 +4,16 @@
     <h1><%= @activity.name %></h1>
     <%= form_for :schedule, url: trip_schedule_index_path(@trip) do |f| %>
         <%= f.hidden_field :activity_id, value: @activity.id %>
-        <div class="form-group">
+        <div class="form-group <%= @schedule.errors[:day].present? ? "has-error" : "" %>">
             <%= f.label "day" %>
+            <i><%= @schedule.errors[:day][0] %></i>
             <%= f.select(:day, options_for_select((1 .. @trip.length).map do |day|
               ["day #{day}", day]
             end), {}, class: "form-control") %>
         </div>
-        <div class="form-group">
+        <div class="form-group <%= @schedule.errors[:start_time].present? ? "has-error" : "" %>">
             <%= f.label "start time" %>
+            <i><%= @schedule.errors[:start_time][0] %></i>
             <div class="bootstrap-timepicker input-group">
                 <span class="input-group-addon"><div class="glyphicon glyphicon-time"></div> </span>
                 <%= f.text_field :start_time, class:"input-small timepicker form-control" %>
