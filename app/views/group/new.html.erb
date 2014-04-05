@@ -13,7 +13,7 @@
         <div class="form-group <%= @group_user.errors[:role].present? ? "has-error" : "" %>">
             <%= f.label "role" %>
             <i><%= @group_user.errors[:role][0] %></i>
-            <%= f.select :role, options_for_select(["Guest", "Admin"], ["Guest", "Planner"]), {}, {class:"form-control"}%>
+            <%= f.select :role, options_for_select([["Guest","guest"], ["Admin","planner"]]), {}, {class:"form-control"}%>
         </div>
 
         <%= f.submit :submit, class:"btn btn-default" %>
