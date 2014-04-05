@@ -1,0 +1,48 @@
+<%= render partial: "layouts/trip_nav", locals: {trip: @trip} %>
+
+<div class="container">
+    <h1><%= @schedule.activity.name %></h1>
+    <%= form_for @schedule, url: trip_schedule_path(@trip, @schedule), method: :put do |f| %>
+        <div class="form-group <%= @schedule.errors[:day].present? ? "has-error" : "" %>">
+            <%= f.label "day" %>
+            <i><%= @schedule.errors[:day][0] %></i>
+            <% days = (1 .. @trip.length).map do |day|
+                          ["day #{day}", day]
+                        end %>
+            <%= f.select(:day, options_for_select(days, selected: @schedule.day), {}, class: "form-control") %>
+        </div>
+        <div class="form-group <%= @schedule.errors[:start_time].present? ? "has-error" : "" %>">
+            <%= f.label "start time" %>
+            <i><%= @schedule.errors[:start_time][0] %></i>
+            <div class="bootstrap-timepicker input-group">
+                <span class="input-group-addon"><div class="glyphicon glyphicon-time"></div> </span>
+                <% time = @schedule.start_time.strftime '%l:%M %P' %>
+                <%= f.text_field :start_time, class:"input-small timepicker form-control", value:time %>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary <%= @schedule.duration == 30 ? "active" : "" %>">
+                    <input type="radio" name="schedule[duration]" value="30">half hour
+                </label>
+                <label class="btn btn-primary <%= @schedule.duration == 60 ? "active" : "" %>">
+                    <input type="radio" name="schedule[duration]" value="60">1 hour
+                </label>
+                <label class="btn btn-primary <%= @schedule.duration == 90 ? "active" : "" %>">
+                    <input type="radio" name="schedule[duration]" value="90">1 hour and a half
+                </label>
+                <label class="btn btn-primary <%= @schedule.duration == 120 ? "active" : "" %>">
+                    <input type="radio" name="schedule[duration]" value="120">2 hours
+                </label>
+                <label class="btn btn-primary <%= @schedule.duration == 180 ? "active" : "" %>">
+                    <input type="radio" name="schedule[duration]" value="180">3 hours
+                </label>
+                <label class="btn btn-primary <%= @schedule.duration == -1 ? "active" : "" %>">
+                    <input type="radio" name="schedule[duration]" value="-1">unbounded
+                </label>
+            </div>
+        </div>
+
+        <%= f.submit :submit, class: "btn btn-default" %>
+    <% end %>
+</div>

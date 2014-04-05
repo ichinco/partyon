@@ -44,7 +44,18 @@ class ScheduleController < ApplicationController
     @schedule = Schedule.find(params[:id])
     @activity = @schedule.activity
     @schedule.destroy
-    redirect_to trip_activity_path(@trip, @activity)
+    redirect_to trip_schedule_index_path(@trip)
+  end
+
+  def edit
+    @schedule = Schedule.find(params[:id])
+  end
+
+  def update
+    @schedule = Schedule.find(params[:id])
+    @schedule.update(schedule_params)
+    @schedule.save()
+    redirect_to trip_schedule_index_path(@trip)
   end
 
   private
