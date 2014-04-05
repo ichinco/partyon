@@ -1,14 +1,19 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
 <div class="container">
-    <%= form_for :group_user, url:trip_group_index_path(@trip) do |f| %>
-        <div class="form-group">
-            <%= f.label "name" %>
-            <%= f.text_field :name, class:"form-control" %>
-        </div>
-        <div class="form-group">
-            <%= f.label "email" %>
-            <%= f.text_field :email, class:"form-control" %>
+    <%= form_for @group_user, url:trip_group_index_path(@trip) do |f| %>
+        <%= f.fields_for :user do |builder| %>
+            <div class="form-group  <%= @group_user.user.errors[:email].present? ? "has-error" : "" %>">
+                <%= builder.label "email" %>
+                <i><%= @group_user.user.errors[:email][0] %></i>
+                <%= builder.text_field :email, class:"form-control" %>
+            </div>
+        <% end %>
+
+        <div class="form-group <%= @group_user.errors[:role].present? ? "has-error" : "" %>">
+            <%= f.label "role" %>
+            <i><%= @group_user.errors[:role][0] %></i>
+            <%= f.select :role, options_for_select(["Guest", "Admin"], ["Guest", "Planner"]), {}, {class:"form-control"}%>
         </div>
 
         <%= f.submit :submit, class:"btn btn-default" %>

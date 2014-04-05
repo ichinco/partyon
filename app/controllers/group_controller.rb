@@ -1,4 +1,6 @@
 class GroupController < ApplicationController
+  include ActionView::Helpers::TextHelper
+
   before_action :get_trip
   before_action :authenticate_user!
 
@@ -16,26 +18,20 @@ class GroupController < ApplicationController
     redirect_to trip_group_index_path(@trip)
   end
 
+  def new
+    @group_user = TripUser.new
+    @group_user.build_user
+  end
+
   def create
-    @trip_user = TripUser.new()
-    @user = User.where(:email=> group_params[:email]).first
-    if @user.nil?
-      @user = User.new()
-      @user.email = group_params[:email]
-      @user.password = "none1111"
-      unless @user.save
-        render 'new'
-        return
-      end
-    end
+    @group_user = TripUser.new(group_params)
+    @group_user.trip = @trip
+    @group_user.user.password = (0...8).map { (65 + rand(26)).chr }.join
 
-    @trip_user.trip = @trip
-    @trip_user.user = @user
-    @trip_user.role = "guest"
-
-    if @trip_user.save
+    if @group_user.save
       redirect_to trip_group_index_path(@trip)
     else
+      flash[:alert] = "#{pluralize(@group_user.errors.count,"error")} prevented this user from being created."
       render 'new'
     end
   end
@@ -49,7 +45,8 @@ class GroupController < ApplicationController
 
   private
   def group_params
-    params.require(:group_user).permit(:email, :name)
+    params.require(:trip_user).permit(:role,
+                                       :user_attributes => [:email])
   end
 
   private
