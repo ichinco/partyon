@@ -22,10 +22,15 @@
                     <% end %>
                 </td>
                 <td>
-                    <%= cost.estimated_amount.nil? ? cost.actual_amount : cost.estimated_amount %>
+                    <%= cost.estimated_amount %>
                 </td>
                 <td>
-                    <%= cost.actual_amount %>
+                    <%= form_for :cost, url:trip_cost_path(@trip, cost), method: :put, html: {class: "form-inline"} do |f| %>
+                        <div class="form-group">
+                            <%= f.text_field :actual_amount, value: cost.actual_amount, placeholder:cost.estimated_amount, class: "form-control"   %>
+                        </div>
+                        <%= f.submit "update", class: "btn btn-default" %>
+                    <% end %>
                 </td>
             </tr>
         <% end %>

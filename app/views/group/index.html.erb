@@ -19,14 +19,14 @@
                     <td><%= user.user.email %></td>
                     <td><div class="glyphicon <%= user.role == "planner" ? "glyphicon-ok" : "" %>"></div></td>
                     <td>
-                        <%= button_to "remove from trip", trip_group_path(@trip, user), method: :delete %>
+                        <%= button_to "remove from trip", trip_group_path(@trip, user), method: :delete, class: "btn btn-default" %>
                         <%= form_for :group_user, url: trip_group_path(@trip, user), method: :put do |f| %>
                             <% if user.role == "planner" %>
                                 <%= f.hidden_field :role, value:"guest" %>
-                                <%= f.submit "remove admin" %>
+                                <%= f.submit "remove admin", class: "btn btn-default" %>
                             <% else %>
                                 <%= f.hidden_field :role, value:"planner" %>
-                                <%= f.submit "make admin" %>
+                                <%= f.submit "make admin", class: "btn btn-default" %>
                             <% end %>
                         <% end %>
                     </td>

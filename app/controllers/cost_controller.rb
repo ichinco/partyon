@@ -26,15 +26,22 @@ class CostController < ApplicationController
   def index
     @costs = Cost.where(trip_id: @trip.id)
     @total = @costs.inject(0) do |sum, cost|
-      if cost.actual_amount.nil? and not cost.estimated_amount.nil?
-        sum + cost.estimated_amount
-      elsif not cost.estimated_amount.nil?
+      if not cost.actual_amount.nil?
         sum + cost.actual_amount
+      elsif not cost.estimated_amount.nil?
+        sum + cost.estimated_amount
       else
         sum
       end
     end
 
+  end
+
+  def update
+    @cost = Cost.find(params[:id])
+    @cost.update(cost_parameters)
+    @cost.save
+    redirect_to trip_cost_index_path(@trip)
   end
 
   private
