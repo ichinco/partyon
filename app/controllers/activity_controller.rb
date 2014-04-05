@@ -32,6 +32,8 @@ class ActivityController < ApplicationController
 
   private
   def activity_params
-    params.require(:activity).permit(:name, :website, :cost, :activity_type)
+    params.require(:activity).permit(:name, :website, :activity_type,
+                                     :schedules_attributes => [:day, :start_time],
+                                     :costs_attributes => [:estimated_amount])
   end
 end

@@ -10,18 +10,35 @@
             <%= f.label "website" %>
             <%= f.text_field :website, class:"form-control" %>
         </div>
-        <div class="form-group">
-            <%= f.label "cost" %>
-            <div class="input-group">
-                <span class="input-group-addon">$</span>
-                <%= f.text_field :cost, class:"form-control", placeholder:"0.00" %>
-            </div>
 
-        </div>
         <div class="form-group">
             <%= f.label "type" %>
             <%= f.select :activity_type, options_for_select(["food","drinks","tour","adventure"]), {}, html_options={class:"form-control"} %>
         </div>
+        <%= f.fields_for :costs do |builder| %>
+            <div class="form-group">
+                <%= builder.label "cost" %>
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <%= builder.text_field :estimated_amount, class:"form-control", placeholder:"0.00" %>
+                </div>
+            </div>
+        <% end %>
+        <%= f.fields_for :schedules do |builder| %>
+            <div class="form-group">
+                <%= builder.label "day" %>
+                <%= builder.select(:day, options_for_select((1 .. @trip.length).map do |day|
+                  ["day #{day}", day]
+                end), {}, class: "form-control") %>
+            </div>
+            <div class="form-group">
+                <%= builder.label "start time" %>
+                <div class="bootstrap-timepicker input-group">
+                    <span class="input-group-addon"><div class="glyphicon glyphicon-time"></div> </span>
+                    <%= builder.text_field :start_time, class:"input-small timepicker form-control" %>
+                </div>
+            </div>
+        <% end %>
 
         <%= f.submit :submit, class:"btn btn-default" %>
     <% end %>
