@@ -24,7 +24,7 @@ class TripController < ApplicationController
   def show
     @trip = Trip.find(params[:id])
 
-    @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_hour, :start_minute)
+    @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_time)
   end
 
   private

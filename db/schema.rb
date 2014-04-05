@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405194752) do
+ActiveRecord::Schema.define(version: 20140405202752) do
 
   create_table "activities", force: true do |t|
     t.string   "name"
@@ -53,9 +53,8 @@ ActiveRecord::Schema.define(version: 20140405194752) do
     t.datetime "updated_at"
     t.integer  "day"
     t.integer  "duration"
-    t.integer  "start_hour"
-    t.integer  "start_minute"
     t.integer  "trip_id"
+    t.time     "start_time"
   end
 
   add_index "schedules", ["activity_id"], name: "index_schedules_on_activity_id"

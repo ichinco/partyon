@@ -7,7 +7,7 @@
         <% @schedules.each do |schedule| %>
             <li>
                 day <%= schedule.day %>
-                @ <%= get_time(schedule).strftime "%H:%M" %>
+                @ <%= schedule.start_time.strftime "%H:%M" %>
                 <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity) %>
             </li>
         <% end %>

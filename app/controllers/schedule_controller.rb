@@ -8,7 +8,7 @@ class ScheduleController < ApplicationController
   end
 
   def index
-    @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_hour, :start_minute)
+    @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_time)
     @schedule_hash = {}
     (1 .. @trip.length).each do |day|
       @schedule_hash[day] = []
@@ -26,10 +26,7 @@ class ScheduleController < ApplicationController
   end
 
   def create
-    @start_time = Time.parse(params[:start_time])
     @schedule = Schedule.new(schedule_params)
-    @schedule.start_hour = @start_time.hour
-    @schedule.start_minute = @start_time.min
     @schedule.trip_id = @trip.id
     if @schedule.save()
       redirect_to trip_schedule_index_path(@trip)
@@ -47,7 +44,7 @@ class ScheduleController < ApplicationController
 
   private
   def schedule_params
-    params.require(:schedule).permit(:activity_id, :day, :duration)
+    params.require(:schedule).permit(:activity_id, :day, :duration, :start_time)
   end
 
 end

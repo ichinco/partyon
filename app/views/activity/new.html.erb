@@ -34,11 +34,20 @@
         <% end %>
         <%= f.fields_for :schedules do |builder| %>
             <%= builder.hidden_field :trip_id, value: @trip.id %>
-            <div class="form-group">
+            <div class="form-group <%= @activity.schedules[0].errors[:day].present? ? "has-error" : "" %>">
                 <%= builder.label "day" %>
+                <i><%= @activity.schedules[0].errors[:day][0]%></i>
                 <%= builder.select(:day, options_for_select((1 .. @trip.length).map do |day|
                   ["day #{day}", day]
                 end), {:include_blank => true, :default => nil}, class: "form-control") %>
+            </div>
+            <div class="form-group <%= @activity.schedules[0].errors[:start_time].present? ? "has-error" : "" %>">
+                <%= builder.label "start time" %>
+                <i><%= @activity.schedules[0].errors[:start_time][0]%></i>
+                <div class="bootstrap-timepicker input-group">
+                    <span class="input-group-addon"><div class="glyphicon glyphicon-time"></div> </span>
+                    <%= builder.text_field :start_time, class:"input-small timepicker form-control" %>
+                </div>
             </div>
         <% end %>
 

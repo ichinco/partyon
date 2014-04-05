@@ -33,12 +33,12 @@ class ActivityController < ApplicationController
     activity_id = params[:id]
     @activity = Activity.find(activity_id)
     @comments = Comment.where(:activity_id=>activity_id).order(:created_at)
-    @schedules = Schedule.where(:activity_id=>activity_id).order(:day, :start_hour, :start_minute)
+    @schedules = Schedule.where(:activity_id=>activity_id).order(:day, :start_time)
   end
 
   private
   def activity_params
-    params.require(:activity).permit(:name, :website, :activity_type,
+    params.require(:activity).permit(:name, :website, :activity_type, :location,
                                      :schedules_attributes => [:day, :start_time, :trip_id],
                                      :costs_attributes => [:estimated_amount, :trip_id])
   end

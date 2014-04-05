@@ -9,7 +9,7 @@
             <% @schedules.each do |schedule| %>
                 <li>
                     day <%= schedule.day %>
-                    @ <%= get_time(schedule).strftime "%H:%M" %>
+                    @ <%= schedule.start_time.strftime "%H:%M" %>
                     <%= link_to "remove from schedule", trip_schedule_path(@trip, schedule), method: :delete %>
                 </li>
             <% end %>
