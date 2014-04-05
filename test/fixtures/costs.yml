@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  activity_id: 
+  estimated_amount: 1
+  actual_amount: 1
+
+two:
+  activity_id: 
+  estimated_amount: 1
+  actual_amount: 1
