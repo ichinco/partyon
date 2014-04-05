@@ -1,7 +1,7 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
 <div class="container">
-    <%= form_for :activity, url:trip_activity_index_path(@trip) do |f| %>
+    <%= form_for @activity, url:trip_activity_index_path(@trip) do |f| %>
         <div class="form-group">
             <%= f.label "activity name" %>
             <%= f.text_field :name, class:"form-control", placeholder:"e.g., Lunch" %>
@@ -16,6 +16,7 @@
             <%= f.select :activity_type, options_for_select(["food","drinks","tour","adventure"]), {}, html_options={class:"form-control"} %>
         </div>
         <%= f.fields_for :costs do |builder| %>
+            <%= builder.hidden_field :trip_id, value: @trip.id %>
             <div class="form-group">
                 <%= builder.label "cost" %>
                 <div class="input-group">
@@ -25,18 +26,12 @@
             </div>
         <% end %>
         <%= f.fields_for :schedules do |builder| %>
+            <%= builder.hidden_field :trip_id, value: @trip.id %>
             <div class="form-group">
                 <%= builder.label "day" %>
                 <%= builder.select(:day, options_for_select((1 .. @trip.length).map do |day|
                   ["day #{day}", day]
                 end), {}, class: "form-control") %>
-            </div>
-            <div class="form-group">
-                <%= builder.label "start time" %>
-                <div class="bootstrap-timepicker input-group">
-                    <span class="input-group-addon"><div class="glyphicon glyphicon-time"></div> </span>
-                    <%= builder.text_field :start_time, class:"input-small timepicker form-control" %>
-                </div>
             </div>
         <% end %>
 

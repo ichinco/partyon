@@ -11,6 +11,9 @@ class ActivityController < ApplicationController
   end
 
   def new
+    @activity = Activity.new()
+    @activity.schedules.build()
+    @activity.costs.build()
   end
 
   def create
@@ -33,7 +36,7 @@ class ActivityController < ApplicationController
   private
   def activity_params
     params.require(:activity).permit(:name, :website, :activity_type,
-                                     :schedules_attributes => [:day, :start_time],
-                                     :costs_attributes => [:estimated_amount])
+                                     :schedules_attributes => [:day, :start_time, :trip_id],
+                                     :costs_attributes => [:estimated_amount, :trip_id])
   end
 end
