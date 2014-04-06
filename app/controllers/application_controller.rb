@@ -10,9 +10,19 @@ class ApplicationController < ActionController::Base
   end
 
   def pretrip
+    unless current_user.present?
+      redirect_to root_path
+      return
+    end
     @trip = Trip.find(params[:trip_id])
     @trip_user_record = TripUser.where(:trip_id=>@trip.id).where(:user_id=>current_user.id).first
     @is_user_guest = @trip_user_record.present?
+
+    unless @is_user_guest
+      redirect_to trip_index_path
+      return
+    end
+
     @is_user_admin = @trip_user_record.role == "planner"
   end
 end
