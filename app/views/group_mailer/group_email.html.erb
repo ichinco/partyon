@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+        <%= @message.user.name %> has sent you a message:
+    </p>
+
+    <p>
+        <%= @message.message %>
+    </p>
+
+    <p>
+        <%= link_to "View trip", trip_path(@message.trip) %>
+    </p>
+
+  </body>
+</html>

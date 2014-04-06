@@ -26,6 +26,7 @@ class MessageController < ApplicationController
     @message.user = current_user
 
     if @message.save
+      GroupMailer.message_email(@message).deliver
       redirect_to trip_group_index_path(@trip)
     else
       render 'new'

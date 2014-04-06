@@ -1,0 +1,5 @@
+<%= @message.user.name %> has sent you a message:
+
+<%= @message.message %>
+
+<%= link_to "View trip", trip_path(@message.trip) %>
