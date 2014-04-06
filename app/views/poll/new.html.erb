@@ -1,0 +1,27 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <h1>Create a Poll</h1>
+
+    <%= form_for @poll, url:trip_poll_index_path(@trip) do |f| %>
+        <div class="form-group <%= @poll.errors[:question].present? ? "has-error" : "" %>">
+            <%= f.label "question*" %>
+            <i><%= @poll.errors[:question][0] %></i>
+            <%= f.text_field :question, class:"form-control", placeholder:"Where should we go for dinner?" %>
+        </div>
+        <div class="form-group <%= @poll.errors[:description].present? ? "has-error" : "" %>">
+            <%= f.label "description" %>
+            <i><%= @poll.errors[:description][0] %></i>
+            <%= f.text_area :description, class:"form-control", placeholder:"" %>
+        </div>
+
+        <%= f.fields_for :poll_choises do |builder| %>
+            <div class="form-group">
+                <%= builder.label "choice" %>
+                <%= builder.text_field :description, class:"form-control", placeholder:"" %>
+            </div>
+        <% end %>
+
+        <%= f.submit "create", class:"btn btn-default" %>
+    <% end %>
+</div>

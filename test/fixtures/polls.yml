@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  trip_id: 
+  question: MyString
+  description: MyText
+
+two:
+  trip_id: 
+  question: MyString
+  description: MyText

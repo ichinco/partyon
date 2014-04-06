@@ -1,0 +1,18 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <h1>Polls</h1>
+    <% if @is_user_admin %>
+        <%= link_to "create poll", new_trip_poll_path(@trip), class:"btn btn-primary" %>
+    <% end %>
+
+    <ul>
+        <% @polls.each do |poll| %>
+            <li>
+                <%= poll.question %>
+                <%= link_to "Vote", trip_poll_path(@trip, poll) %>
+                <%= link_to "View Results", trip_poll_path(@trip, poll) %>
+            </li>
+        <% end %>
+    </ul>
+</div>

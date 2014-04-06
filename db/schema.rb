@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140406203532) do
+ActiveRecord::Schema.define(version: 20140406223137) do
 
   create_table "activities", force: true do |t|
     t.string   "name"
@@ -74,6 +74,37 @@ ActiveRecord::Schema.define(version: 20140406203532) do
 
   add_index "messages", ["trip_id"], name: "index_messages_on_trip_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+
+  create_table "poll_choises", force: true do |t|
+    t.integer  "poll_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "poll_choises", ["poll_id"], name: "index_poll_choises_on_poll_id"
+
+  create_table "poll_votes", force: true do |t|
+    t.integer  "poll_choise_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "poll_id"
+  end
+
+  add_index "poll_votes", ["poll_choise_id"], name: "index_poll_votes_on_poll_choise_id"
+  add_index "poll_votes", ["poll_id"], name: "index_poll_votes_on_poll_id"
+  add_index "poll_votes", ["user_id"], name: "index_poll_votes_on_user_id"
+
+  create_table "polls", force: true do |t|
+    t.integer  "trip_id"
+    t.string   "question"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "polls", ["trip_id"], name: "index_polls_on_trip_id"
 
   create_table "schedules", force: true do |t|
     t.integer  "activity_id"

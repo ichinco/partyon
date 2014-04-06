@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  poll_choise_id: 
+  user_id: 
+
+two:
+  poll_choise_id: 
+  user_id: 

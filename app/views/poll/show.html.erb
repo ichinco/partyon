@@ -1,0 +1,38 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <h1><%= @poll.question %></h1>
+
+    <ul>
+        <% @poll.poll_choises.each do |choice| %>
+            <li>
+                <div>
+                    <%= choice.description %>
+                    <% votes= choice.poll_votes.where(:poll_choise_id => choice.id) %>
+                    <% if @poll_vote.nil? %>
+                        <%= form_for :poll_vote, url:trip_poll_vote_index_path(@trip,@poll) do |f| %>
+                            <%= f.hidden_field :poll_id, value:@poll.id %>
+                            <%= f.hidden_field :poll_choise_id, value:choice.id %>
+                            <%= f.submit "vote", class:"btn btn-primary" %>
+                        <% end %>
+                    <% elsif @poll_vote.poll_choise == choice %>
+                        <div class="glyphicon glyphicon-ok"></div>
+                    <% end %>
+
+                    <% if @is_user_admin %>
+                        (<%= (votes.map do |vote| vote.user.email end).join(", ")  %>)
+                    <% end %>
+
+                    <div class="progress">
+                      <% choice_count = votes.count %>
+                      <% total = @trip.trip_users.count %>
+                      <% percent = (choice_count * 100) / total %>
+                      <div class="progress-bar" role="progressbar" aria-valuenow="<%= choice_count %>" aria-valuemin="0" aria-valuemax="<%= total %>" style="width: <%= percent %>%;">
+                        <span class="sr-only"><%= choice.poll_votes.count %></span>
+                      </div>
+                    </div>
+                </div>
+            </li>
+        <% end %>
+    </ul>
+</div>

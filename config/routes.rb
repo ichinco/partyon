@@ -26,6 +26,9 @@ Partyon::Application.routes.draw do
     resources :cost
     resources :invitation
     resources :message
+    resources :poll do
+      resources :vote
+    end
   end
 
   # Example resource route with options:
