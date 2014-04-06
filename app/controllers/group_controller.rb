@@ -25,7 +25,8 @@ class GroupController < ApplicationController
   def create
     @invitation = Invitation.find(params[:trip_user][:invitation_id])
     code = params[:trip_user][:invitation_code]
-    unless code == @invitation.code
+    unless code == @invitation.code && @invitation.trip == @trip
+      flash[:alert] = "Invalid invitation."
       redirect_to trip_index_path
       return
     end

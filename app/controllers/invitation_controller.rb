@@ -22,6 +22,7 @@ class InvitationController < ApplicationController
   def create
     @invitation = Invitation.new(invitation_params)
     @invitation.code = (0...32).map { (65 + rand(26)).chr }.join
+    @invitation.trip = @trip
 
     if @invitation.save
       redirect_to trip_group_index_path(@trip)
