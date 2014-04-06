@@ -28,7 +28,7 @@
                 <i><%= @activity.costs[0].errors[:estimated_amount][0] %></i>
                 <div class="input-group">
                     <span class="input-group-addon">$</span>
-                    <%= builder.text_field :estimated_amount, class:"form-control", placeholder:"0.00" %>
+                    <%= builder.text_field :estimated_amount, class:"form-control", placeholder:"100" %>
                 </div>
             </div>
         <% end %>
