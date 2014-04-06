@@ -3,6 +3,8 @@
 <div class="container">
     <h1><%= @poll.question %></h1>
 
+    <p><%= @poll.description %></p>
+
     <ul>
         <% @poll.poll_choises.each do |choice| %>
             <li>
@@ -19,7 +21,7 @@
                         <div class="glyphicon glyphicon-ok"></div>
                     <% end %>
 
-                    <% if @is_user_admin %>
+                    <% if @is_user_admin && votes.count > 0 %>
                         (<%= (votes.map do |vote| vote.user.email end).join(", ")  %>)
                     <% end %>
 
