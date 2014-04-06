@@ -46,7 +46,7 @@ class GroupController < ApplicationController
   private
   def group_params
     params.require(:trip_user).permit(:role,
-                                       :user_attributes => [:email])
+                                       :user_attributes => [:email, :name])
   end
 
   private

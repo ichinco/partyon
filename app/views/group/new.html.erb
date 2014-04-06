@@ -3,6 +3,11 @@
 <div class="container">
     <%= form_for @group_user, url:trip_group_index_path(@trip) do |f| %>
         <%= f.fields_for :user do |builder| %>
+            <div class="form-group  <%= @group_user.user.errors[:name].present? ? "has-error" : "" %>">
+                <%= builder.label "name" %>
+                <i><%= @group_user.user.errors[:name][0] %></i>
+                <%= builder.text_field :name, class:"form-control" %>
+            </div>
             <div class="form-group  <%= @group_user.user.errors[:email].present? ? "has-error" : "" %>">
                 <%= builder.label "email" %>
                 <i><%= @group_user.user.errors[:email][0] %></i>
