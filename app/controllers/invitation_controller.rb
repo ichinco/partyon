@@ -1,7 +1,7 @@
 class InvitationController < ApplicationController
-  before_action :authenticate_user!, only:[:new, :create]
-  before_action :pretrip, only:[:new, :create]
-  before_action :require_trip_admin, only:[:new, :create]
+  before_action :authenticate_user!, only:[:new, :create, :destroy]
+  before_action :pretrip, only:[:new, :create, :destroy]
+  before_action :require_trip_admin, only:[:new, :create, :destroy]
 
   def show
     @trip = Trip.find(params[:trip_id])
@@ -25,12 +25,19 @@ class InvitationController < ApplicationController
     @invitation = Invitation.new(invitation_params)
     @invitation.code = (0...32).map { (65 + rand(26)).chr }.join
     @invitation.trip = @trip
+    @invitation.status = false
 
     if @invitation.save
       redirect_to trip_group_index_path(@trip)
     else
       render 'new'
     end
+  end
+
+  def destroy
+    @invitation = Invitation.find(params[:id])
+    @invitation.destroy
+    redirect_to trip_group_index_path(@trip)
   end
 
   private

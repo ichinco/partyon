@@ -7,6 +7,7 @@ class GroupController < ApplicationController
 
   def index
     @users = TripUser.where(:trip_id => @trip.id)
+    @invitations = Invitation.where(:trip_id => @trip.id).where(:status => false)
   end
 
   def destroy
@@ -37,6 +38,9 @@ class GroupController < ApplicationController
     @group_user.trip = @trip
     @group_user.user = current_user
     @group_user.role = @invitation.role
+
+    @invitation.status=true
+    @invitation.save()
 
     if @group_user.save
       redirect_to trip_path(@trip)
