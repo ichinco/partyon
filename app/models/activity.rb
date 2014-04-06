@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
   accepts_nested_attributes_for :schedules, reject_if: :day_start_time_blank
 
   def estimated_cost_blank(a)
-    a[:estimated_cost].blank?
+    a[:estimated_amount].blank?
   end
 
   def day_start_time_blank(a)
