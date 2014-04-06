@@ -9,9 +9,7 @@
     <ul>
         <% @polls.each do |poll| %>
             <li>
-                <%= poll.question %>
-                <%= link_to "Vote", trip_poll_path(@trip, poll) %>
-                <%= link_to "View Results", trip_poll_path(@trip, poll) %>
+                <%= link_to poll.question, trip_poll_path(@trip, poll) %>
             </li>
         <% end %>
     </ul>
