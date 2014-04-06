@@ -1,6 +1,15 @@
 
 <div class="container">
     <h1>My Trips</h1> <%= link_to "create new", new_trip_path %>
+    <% if session[:invitation_id].present? %>
+        <% @trip = Trip.find(session[:invitation_trip]) %>
+        <%= form_for :trip_user, url:trip_group_index_path(session[:invitation_trip]) do |f| %>
+            <%= f.hidden_field :invitation_id, :value=> session[:invitation_id] %>
+            <%= f.hidden_field :invitation_code, :value=> session[:invitation_code] %>
+            <%= f.label "join trip #{@trip.title}" %>
+            <%= f.submit :submit, class:"btn btn-default" %>
+        <% end %>
+    <% end %>
     <% @trips.each do |trip| %>
         <div>
             <h3><%= link_to trip.title, trip_path(trip) %></h3>

@@ -2,8 +2,8 @@ class GroupController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   before_action :authenticate_user!
-  before_action :pretrip
-  before_action :require_trip_admin, only:[:new, :update, :destroy]
+  before_action :pretrip, only:[:index,:destroy,:update]
+  before_action :require_trip_admin, only:[:update, :destroy]
 
   def index
     @users = TripUser.where(:trip_id => @trip.id)
@@ -18,6 +18,7 @@ class GroupController < ApplicationController
   def new
     @group_user = TripUser.new
     @group_user.build_user
+    @trip = Trip.find(session[:invitation_trip])
 
     @invitation = Invitation.find(session[:invitation_id])
   end
@@ -25,6 +26,7 @@ class GroupController < ApplicationController
   def create
     @invitation = Invitation.find(params[:trip_user][:invitation_id])
     code = params[:trip_user][:invitation_code]
+    @trip = Trip.find(params[:trip_id])
     unless code == @invitation.code && @invitation.trip == @trip
       flash[:alert] = "Invalid invitation."
       redirect_to trip_index_path

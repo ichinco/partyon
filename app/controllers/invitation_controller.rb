@@ -5,9 +5,11 @@ class InvitationController < ApplicationController
 
   def show
     @trip = Trip.find(params[:trip_id])
+    session[:after_sign_in] = new_trip_group_path(@trip)
     request.env['omniauth.origin'] = new_trip_group_path(@trip)
     session['invitation_id'] = params[:id]
     session['invitation_code'] = params[:code]
+    session['invitation_trip'] = params[:trip_id]
 
     if current_user.present?
       redirect_to new_trip_group_path(@trip)
