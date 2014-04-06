@@ -2,11 +2,7 @@ class ActivityController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   before_action :authenticate_user!
-  before_action :get_trip
-
-  def get_trip
-    @trip = Trip.find(params[:trip_id])
-  end
+  before_action :pretrip
 
   def index
     @activities = Activity.where(:trip_id=>@trip.id)

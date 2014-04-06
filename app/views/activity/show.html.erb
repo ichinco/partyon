@@ -2,7 +2,9 @@
 
 <div class="container">
     <h1><%= @activity.name %></h1>
-    <%= link_to "add to schedule", new_trip_schedule_path(@trip,activity_id: @activity.id) %>
+    <% if @is_user_admin %>
+        <%= link_to "add to schedule", new_trip_schedule_path(@trip,activity_id: @activity.id) %>
+    <% end %>
 
     <div class="schedules">
         <ul>
@@ -10,8 +12,10 @@
                 <li>
                     day <%= schedule.day %>
                     @ <%= schedule.start_time.strftime "%l:%M %P" %>
-                    <%= link_to "remove from schedule", trip_schedule_path(@trip, schedule), method: :delete %>
-                    <%= link_to "edit", edit_trip_schedule_path(@trip, schedule) %>
+                    <% if @is_user_admin %>
+                        <%= link_to "remove from schedule", trip_schedule_path(@trip, schedule), method: :delete %>
+                        <%= link_to "edit", edit_trip_schedule_path(@trip, schedule) %>
+                    <% end %>
                 </li>
             <% end %>
         </ul>

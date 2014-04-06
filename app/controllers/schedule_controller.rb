@@ -2,12 +2,8 @@ require 'time'
 class ScheduleController < ApplicationController
   include ActionView::Helpers::TextHelper
 
-  before_action :get_trip
+  before_action :pretrip
   before_action :authenticate_user!
-
-  def get_trip
-    @trip = Trip.find(params[:trip_id])
-  end
 
   def index
     @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_time)

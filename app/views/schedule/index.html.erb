@@ -18,15 +18,19 @@
                       <ol>
                           <% @schedule_hash[day].each do |schedule| %>
                               <li>
-                                  <%= link_to "delete", trip_schedule_path(@trip, schedule), method: :delete %>
-                                  <%= link_to "edit", edit_trip_schedule_path(@trip, schedule) %>
+                                  <% if @is_user_admin %>
+                                      <%= link_to "delete", trip_schedule_path(@trip, schedule), method: :delete %>
+                                      <%= link_to "edit", edit_trip_schedule_path(@trip, schedule) %>
+                                  <% end %>
                                   <%= schedule.start_time.strftime "%l:%M %P" %>
                                   <%= link_to schedule.activity.name, trip_activity_path(@trip, schedule.activity) %>
                               </li>
                           <% end %>
                       </ol>
 
-                      <%= link_to "Add to Schedule", trip_activity_index_path(@trip) %>
+                      <% if @is_user_admin %>
+                        <%= link_to "Add to Schedule", trip_activity_index_path(@trip) %>
+                      <% end %>
                   </div>
               </div>
           <% end %>

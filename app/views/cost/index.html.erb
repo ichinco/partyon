@@ -2,7 +2,9 @@
 
 <div class="container">
     <h1>Costs</h1>
-    <%= link_to "add new cost", new_trip_cost_path(@trip), class:"btn btn-primary" %>
+    <% if @is_user_admin %>
+        <%= link_to "add new cost", new_trip_cost_path(@trip), class:"btn btn-primary" %>
+    <% end %>
     <table class="table">
         <thead>
             <tr>
@@ -25,11 +27,19 @@
                     <%= cost.estimated_amount %>
                 </td>
                 <td>
-                    <%= form_for :cost, url:trip_cost_path(@trip, cost), method: :put, html: {class: "form-inline"} do |f| %>
-                        <div class="form-group">
-                            <%= f.text_field :actual_amount, value: cost.actual_amount, placeholder:cost.estimated_amount, class: "form-control"   %>
-                        </div>
-                        <%= f.submit "update", class: "btn btn-default" %>
+                    <% if @is_user_admin %>
+                        <%= form_for :cost, url:trip_cost_path(@trip, cost), method: :put, html: {class: "form-inline"} do |f| %>
+                            <div class="form-group">
+                                <%= f.text_field :actual_amount, value: cost.actual_amount, placeholder:cost.estimated_amount, class: "form-control"   %>
+                            </div>
+                            <%= f.submit "update", class: "btn btn-default" %>
+                        <% end %>
+                    <% else %>
+                        <% if cost.actual_amount.present? %>
+                            <%= cost.actual_amount %>
+                        <% else %>
+                            <i><%= cost.estimated_amount %></i>
+                        <% end %>
                     <% end %>
                 </td>
             </tr>
