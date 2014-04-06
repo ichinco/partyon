@@ -1,1 +1,4 @@
-hello, world!
+<%= @invitation.user.name %> is planning a trip to <%= @invitation.trip.location %>
+and has invited you to participate in the planning.
+
+<%= link_to "Join #{@invitation.trip.location}", trip_invitation_path(@invitation.trip, @invitation) %>

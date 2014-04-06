@@ -26,8 +26,9 @@ class InvitationController < ApplicationController
     @invitation.code = (0...32).map { (65 + rand(26)).chr }.join
     @invitation.trip = @trip
     @invitation.status = false
+    @invitation.user = current_user
 
-    InvitationMailer.invitation_email(@invitation).deliver
+    #InvitationMailer.invitation_email(@invitation).deliver
 
     if @invitation.save
       redirect_to trip_group_index_path(@trip)
@@ -44,6 +45,6 @@ class InvitationController < ApplicationController
 
   private
   def invitation_params
-    params.require(:invitation).permit(:name, :email, :role)
+    params.require(:invitation).permit(:name, :email, :role, :message)
   end
 end

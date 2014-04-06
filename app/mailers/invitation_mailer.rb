@@ -3,6 +3,8 @@ class InvitationMailer < ActionMailer::Base
 
   def invitation_email(invitation)
     @invitation = invitation
-    mail(to: @invitation.email, subject: 'You have been invited to #{@invitation.trip.title}')
+    mail(to: @invitation.email,
+         from: @invitation.user.email,
+         subject: "You have been invited to #{@invitation.trip.title}!")
   end
 end

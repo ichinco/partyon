@@ -27,15 +27,5 @@ Partyon::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.smtp_settings = {
-      :port =>           '587',
-      :address =>        'smtp.mandrillapp.com',
-      :user_name =>      ENV['MANDRILL_USERNAME'],
-      :password =>       ENV['MANDRILL_APIKEY'],
-      :domain =>         'heroku.com',
-      :authentication => :plain
-  }
-  config.action_mailer.delivery_method = :smtp
 end

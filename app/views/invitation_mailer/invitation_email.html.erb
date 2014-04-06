@@ -4,6 +4,19 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    hello, world!
+    <p>
+        <%= @invitation.user.name %> is planning a trip to <%= @invitation.trip.location %>
+        and has invited you to participate in the planning.
+    </p>
+
+    <% unless @invitation.message.blank? %>
+      <p>They say:</p>
+
+      <p>
+        <%= @invitation.message %>
+      </p>
+    <% end %>
+
+    <%= link_to "Join #{@invitation.trip.location}", trip_invitation_path(@invitation.trip, @invitation) %>
   </body>
 </html>

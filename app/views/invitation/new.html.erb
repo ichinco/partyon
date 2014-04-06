@@ -20,6 +20,12 @@
             <%= f.select :role, options_for_select([["Guest","guest"], ["Admin","planner"]]), {}, {class:"form-control"}%>
         </div>
 
+        <div class="form-group  <%= @invitation.errors[:message].present? ? "has-error" : "" %>">
+            <%= f.label "message" %>
+            <i><%= @invitation.errors[:message][0] %></i>
+            <%= f.text_area :message, class:"form-control", value:"Hi! I'm using party up to stay organized while I plan our trip to #{@trip.location}. Create an account so we can keep in touch!" %>
+        </div>
+
         <%= f.submit :submit, class:"btn btn-default" %>
     <% end %>
 </div>
