@@ -25,4 +25,10 @@ class ApplicationController < ActionController::Base
 
     @is_user_admin = @trip_user_record.role == "planner"
   end
+
+  def require_trip_admin
+    unless @is_user_admin
+      redirect_to trip_path(@trip)
+    end
+  end
 end

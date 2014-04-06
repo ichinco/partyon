@@ -3,6 +3,7 @@ class CostController < ApplicationController
 
   before_action :pretrip
   before_action :authenticate_user!
+  before_action :require_trip_admin, only:[:new, :create, :update]
 
   def new
     @cost = Cost.new()

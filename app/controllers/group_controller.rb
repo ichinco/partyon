@@ -1,8 +1,9 @@
 class GroupController < ApplicationController
   include ActionView::Helpers::TextHelper
 
-  before_action :pretrip
   before_action :authenticate_user!
+  before_action :pretrip
+  before_action :require_trip_admin, only:[:new, :create, :update, :destroy]
 
   def index
     @users = TripUser.where(:trip_id => @trip.id)
