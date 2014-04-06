@@ -2,25 +2,9 @@
 
 <div class="container">
     <%= form_for @group_user, url:trip_group_index_path(@trip) do |f| %>
-        <%= f.fields_for :user do |builder| %>
-            <div class="form-group  <%= @group_user.user.errors[:name].present? ? "has-error" : "" %>">
-                <%= builder.label "name" %>
-                <i><%= @group_user.user.errors[:name][0] %></i>
-                <%= builder.text_field :name, class:"form-control" %>
-            </div>
-            <div class="form-group  <%= @group_user.user.errors[:email].present? ? "has-error" : "" %>">
-                <%= builder.label "email" %>
-                <i><%= @group_user.user.errors[:email][0] %></i>
-                <%= builder.text_field :email, class:"form-control" %>
-            </div>
-        <% end %>
-
-        <div class="form-group <%= @group_user.errors[:role].present? ? "has-error" : "" %>">
-            <%= f.label "role" %>
-            <i><%= @group_user.errors[:role][0] %></i>
-            <%= f.select :role, options_for_select([["Guest","guest"], ["Admin","planner"]]), {}, {class:"form-control"}%>
-        </div>
-
+        <%= f.hidden_field :invitation_id, :value=> @invitation.id %>
+        <%= f.hidden_field :invitation_code, :value=> @invitation.code %>
+        <%= f.label "join trip #{@trip.title}" %>
         <%= f.submit :submit, class:"btn btn-default" %>
     <% end %>
 </div>

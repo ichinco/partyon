@@ -1,0 +1,25 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <h1>Invite</h1>
+    <%= form_for @invitation, url:trip_invitation_index_path(@trip) do |f| %>
+        <div class="form-group  <%= @invitation.errors[:name].present? ? "has-error" : "" %>">
+            <%= f.label "name" %>
+            <i><%= @invitation.errors[:name][0] %></i>
+            <%= f.text_field :name, class:"form-control" %>
+        </div>
+        <div class="form-group  <%= @invitation.errors[:email].present? ? "has-error" : "" %>">
+            <%= f.label "email" %>
+            <i><%= @invitation.errors[:email][0] %></i>
+            <%= f.email_field :email, class:"form-control" %>
+        </div>
+
+        <div class="form-group <%= @invitation.errors[:role].present? ? "has-error" : "" %>">
+            <%= f.label "role" %>
+            <i><%= @invitation.errors[:role][0] %></i>
+            <%= f.select :role, options_for_select([["Guest","guest"], ["Admin","planner"]]), {}, {class:"form-control"}%>
+        </div>
+
+        <%= f.submit :submit, class:"btn btn-default" %>
+    <% end %>
+</div>

@@ -3,7 +3,7 @@ class GroupController < ApplicationController
 
   before_action :authenticate_user!
   before_action :pretrip
-  before_action :require_trip_admin, only:[:new, :create, :update, :destroy]
+  before_action :require_trip_admin, only:[:new, :update, :destroy]
 
   def index
     @users = TripUser.where(:trip_id => @trip.id)
@@ -18,15 +18,25 @@ class GroupController < ApplicationController
   def new
     @group_user = TripUser.new
     @group_user.build_user
+
+    @invitation = Invitation.find(session[:invitation_id])
   end
 
   def create
+    @invitation = Invitation.find(params[:trip_user][:invitation_id])
+    code = params[:trip_user][:invitation_code]
+    unless code == @invitation.code
+      redirect_to trip_index_path
+      return
+    end
+
     @group_user = TripUser.new(group_params)
     @group_user.trip = @trip
-    @group_user.user.password = (0...8).map { (65 + rand(26)).chr }.join
+    @group_user.user = current_user
+    @group_user.role = @invitation.role
 
     if @group_user.save
-      redirect_to trip_group_index_path(@trip)
+      redirect_to trip_path(@trip)
     else
       flash[:alert] = "#{pluralize(@group_user.errors.count,"error")} prevented this user from being created."
       render 'new'

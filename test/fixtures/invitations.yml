@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  trip_id: 
+  code: MyString
+  email: MyString
+  name: MyString
+  role: MyString
+
+two:
+  trip_id: 
+  code: MyString
+  email: MyString
+  name: MyString
+  role: MyString
