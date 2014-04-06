@@ -54,3 +54,5 @@ end
 gem 'devise'
 
 gem 'bootstrap-timepicker-rails'
+
+gem 'mandrill-api'
