@@ -1,0 +1,17 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <h1><%= @message.subject %></h1>
+    <div>
+        Sent on:
+        <%= @message.created_at.strftime "%b %e %G %l:%M %P" %>
+    </div>
+    <div>
+        To:
+        <%= @recipients.join(", ") %>
+    </div>
+    <div>
+        <%= @message.message %>
+    </div>
+
+</div>

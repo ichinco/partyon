@@ -1,0 +1,23 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <h1>Send Group Email</h1>
+    <%= form_for :message, url:trip_message_index_path(@trip) do |f| %>
+        <div class="form-group">
+            <%= f.label "to" %>
+            <%= f.text_field :subject, class:"form-control", value:@recipients.join(", "), disabled:true %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label "subject" %>
+            <%= f.text_field :subject, class:"form-control" %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label "message" %>
+            <%= f.text_area :message, class:"form-control" %>
+        </div>
+
+        <%= f.submit :send, class:"btn btn-default" %>
+    <% end %>
+</div>

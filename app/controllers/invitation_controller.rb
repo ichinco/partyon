@@ -28,7 +28,7 @@ class InvitationController < ApplicationController
     @invitation.status = false
     @invitation.user = current_user
 
-    #InvitationMailer.invitation_email(@invitation).deliver
+    InvitationMailer.invitation_email(@invitation).deliver
 
     if @invitation.save
       redirect_to trip_group_index_path(@trip)

@@ -25,6 +25,7 @@ Partyon::Application.routes.draw do
     resources :group
     resources :cost
     resources :invitation
+    resources :message
   end
 
   # Example resource route with options:

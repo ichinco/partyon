@@ -4,6 +4,8 @@
     <h1>Trip participants</h1>
     <% if @is_user_admin %>
         <%= link_to "add new guest", new_trip_invitation_path(@trip), class:"btn btn-primary" %>
+        <%= link_to "send email to group", new_trip_message_path(@trip), class:"btn btn-primary" %>
+        <%= link_to "view group email", trip_message_index_path(@trip), class:"btn btn-primary" %>
     <% end %>
     <table class="table">
         <thead>
