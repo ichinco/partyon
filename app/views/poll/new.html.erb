@@ -16,11 +16,13 @@
         </div>
 
         <%= f.fields_for :poll_choises do |builder| %>
-            <div class="form-group">
+            <div class="form-group choice">
                 <%= builder.label "choice" %>
                 <%= builder.text_field :description, class:"form-control", placeholder:"" %>
             </div>
         <% end %>
+
+        <button class="btn btn-default add-choice hidden">add choice</button>
 
         <%= f.submit "create", class:"btn btn-default" %>
     <% end %>

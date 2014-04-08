@@ -3,9 +3,15 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready(->
-  $('.timepicker').timepicker({
-      template: false,
-      showInputs: false,
-      minuteStep: 5
-  })
+  $(".add-choice").click( ->
+    $('.choice.hidden').first().removeClass("hidden")
+    false
+  )
+  $(".add-choice").removeClass("hidden")
+  $('.choice').addClass("hidden")
+  $('.choice.hidden').first().removeClass("hidden")
+  $('.choice.hidden').first().removeClass("hidden")
+  $('.choice.hidden').first().removeClass("hidden")
+  $('.choice.hidden').first().removeClass("hidden")
+  $('.choice.hidden').first().removeClass("hidden")
 )
