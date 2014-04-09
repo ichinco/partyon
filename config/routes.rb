@@ -17,6 +17,8 @@ Partyon::Application.routes.draw do
 
   root 'root#index'
 
+  resources :suggestion
+
   resources :trip do
     resources :activity do
       resources :comment

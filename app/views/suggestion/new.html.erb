@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Send a Comment or Suggestion</h1>
+    <%= form_for :suggestion, url:suggestion_index_path do |f| %>
+        <div class="form-group">
+            <%= f.label "message" %>
+            <%= f.text_area :message, class:"form-control" %>
+        </div>
+
+        <%= f.submit "send", class:"btn btn-primary" %>
+    <% end %>
+</div>
