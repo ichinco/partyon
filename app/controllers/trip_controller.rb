@@ -23,6 +23,13 @@ class TripController < ApplicationController
 
   def show
     @trip = Trip.find(params[:id])
+    @trip_user_record = TripUser.where(:trip_id=>@trip.id).where(:user_id=>current_user.id).first
+    @is_user_guest = @trip_user_record.present?
+
+    unless @is_user_guest
+      redirect_to trip_index_path
+      return
+    end
 
     @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_time)
   end
