@@ -1,4 +1,6 @@
 class MessageController < ApplicationController
+  include EventHelper
+
   before_action :authenticate_user!
   before_action :pretrip
   before_action :require_trip_admin
@@ -27,6 +29,7 @@ class MessageController < ApplicationController
 
     if @message.save
       GroupMailer.message_email(@message).deliver
+      add_event(current_user, @trip, "#{current_user.name} created sent a message #{@message.subject}")
       redirect_to trip_group_index_path(@trip)
     else
       render 'new'

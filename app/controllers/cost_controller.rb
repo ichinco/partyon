@@ -1,5 +1,6 @@
 class CostController < ApplicationController
   include ActionView::Helpers::TextHelper
+  include EventHelper
 
   before_action :pretrip
   before_action :authenticate_user!
@@ -12,6 +13,8 @@ class CostController < ApplicationController
   def create
     @cost = Cost.new(cost_parameters)
     @cost.trip = @trip
+
+    add_event(current_user, @trip, "#{current_user.name} says that #{@cost.description} will cost #{@cost.actual_amount}")
     if @cost.save
       redirect_to trip_cost_index_path(@trip)
     else
@@ -37,6 +40,7 @@ class CostController < ApplicationController
   def update
     @cost = Cost.find(params[:id])
     @cost.update(cost_parameters)
+    add_event(current_user, @trip, "#{current_user.name} says that #{@cost.description} will cost #{@cost.actual_amount}")
     @cost.save
     redirect_to trip_cost_index_path(@trip)
   end

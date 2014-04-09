@@ -6,6 +6,12 @@
     <%= link_to "edit trip", edit_trip_path(@trip) %>
 
     <ul>
+        <% @events.each do |event| %>
+            <li><%= raw(event.message) %></li>
+        <% end %>
+    </ul>
+
+    <ul>
         <% @schedules.each do |schedule| %>
             <li>
                 day <%= schedule.day %>

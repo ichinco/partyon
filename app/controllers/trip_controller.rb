@@ -32,6 +32,7 @@ class TripController < ApplicationController
     end
 
     @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_time)
+    @events = Event.where(:trip_id=>@trip.id).order(created_at: :desc)
   end
 
   def edit

@@ -1,4 +1,6 @@
 class InvitationController < ApplicationController
+  include EventHelper
+
   before_action :authenticate_user!, only:[:new, :create, :destroy]
   before_action :pretrip, only:[:new, :create, :destroy]
   before_action :require_trip_admin, only:[:new, :create, :destroy]
@@ -27,6 +29,8 @@ class InvitationController < ApplicationController
     @invitation.trip = @trip
     @invitation.status = false
     @invitation.user = current_user
+
+    add_event(current_user, @trip, "#{current_user.name} invited #{@invitation.name}")
 
     if @invitation.save
       InvitationMailer.invitation_email(@invitation).deliver

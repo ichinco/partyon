@@ -1,6 +1,7 @@
 require 'time'
 class ScheduleController < ApplicationController
   include ActionView::Helpers::TextHelper
+  include EventHelper
 
   before_action :authenticate_user!
   before_action :pretrip
@@ -28,6 +29,9 @@ class ScheduleController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     @schedule.trip_id = @trip.id
+
+    add_event(current_user, @trip, "#{current_user.name} decided #{@schedule.activity.name} will occur on day #{@schedule.day} at #{@schedule.start_time.strftime "%l:%M %P"}")
+
     if @schedule.save()
       redirect_to trip_schedule_index_path(@trip)
     else
@@ -52,6 +56,8 @@ class ScheduleController < ApplicationController
     @schedule = Schedule.find(params[:id])
     @schedule.update(schedule_params)
     @schedule.save()
+
+    add_event(current_user, @trip, "#{current_user.name} updated #{@schedule.activity.name} to occur on day #{@schedule.day} at #{@schedule.start_time.strftime "%l:%M %P"}")
     redirect_to trip_schedule_index_path(@trip)
   end
 

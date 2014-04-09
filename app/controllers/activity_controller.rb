@@ -1,5 +1,6 @@
 class ActivityController < ApplicationController
   include ActionView::Helpers::TextHelper
+  include EventHelper
 
   before_action :authenticate_user!
   before_action :pretrip
@@ -18,6 +19,9 @@ class ActivityController < ApplicationController
   def create
     @activity = Activity.new(activity_params)
     @activity.trip_id = @trip.id
+
+    add_event(current_user, @trip, "#{current_user.name} added an activity #{@activity.name}")
+
     if @activity.save
       redirect_to trip_activity_path(@trip, @activity)
     else

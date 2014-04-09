@@ -1,5 +1,6 @@
 class GroupController < ApplicationController
   include ActionView::Helpers::TextHelper
+  include EventHelper
 
   before_action :authenticate_user!
   before_action :pretrip, only:[:index,:destroy,:update]
@@ -41,6 +42,8 @@ class GroupController < ApplicationController
 
     @invitation.status=true
     @invitation.save()
+
+    add_event(current_user, @trip, "#{current_user.name} joined the trip!")
 
     if @group_user.save
       redirect_to trip_path(@trip)

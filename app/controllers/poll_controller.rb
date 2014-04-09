@@ -1,4 +1,6 @@
 class PollController < ApplicationController
+  include EventHelper
+
   before_action :authenticate_user!
   before_action :pretrip
   before_action :require_trip_admin, only:[:new, :create]
@@ -11,6 +13,8 @@ class PollController < ApplicationController
   def create
     @poll = Poll.new(poll_params)
     @poll.trip = @trip
+
+    add_event(current_user, @trip, "#{current_user.name} created a new poll #{@poll.question}")
 
     if @poll.save
       redirect_to trip_poll_index_path(@trip)
