@@ -27,8 +27,19 @@ class TripController < ApplicationController
     @schedules = Schedule.where(:trip_id=>@trip.id).order(:day, :start_time)
   end
 
+  def edit
+    @trip = Trip.find(params[:id])
+  end
+
+  def update
+    @trip = Trip.find(params[:id])
+    @trip.update(trip_parameters)
+    @trip.save
+    redirect_to trip_path(@trip)
+  end
+
   private
   def trip_parameters
-    params.require(:trip).permit(:title,:location,:length,:date)
+    params.require(:trip).permit(:title,:location,:length,:start_date)
   end
 end

@@ -3,6 +3,8 @@
 <div class="container">
     <h1><%= @trip.title %> <small><%= @trip.location %></small></h1>
 
+    <%= link_to "edit trip", edit_trip_path(@trip) %>
+
     <ul>
         <% @schedules.each do |schedule| %>
             <li>

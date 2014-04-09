@@ -1,22 +1,21 @@
-
 <div class="container">
-    <h1>New trip</h1>
-    <%= form_for :trip, url:trip_index_path do |f| %>
+    <h1>Edit trip</h1>
+    <%= form_for :trip, url:trip_path(@trip), method: :put do |f| %>
         <div class="form-group">
             <%= f.label "trip name" %>
-            <%= f.text_field :title, class:"form-control" %>
+            <%= f.text_field :title, class:"form-control", value:@trip.title %>
         </div>
         <div class="form-group">
             <%= f.label "start date" %>
-            <%= f.text_field :start_date, class:"form-control" %>
+            <%= f.text_field :start_date, class:"form-control", value:@trip.start_date %>
         </div>
         <div class="form-group">
             <%= f.label "# of days" %>
-            <%= f.text_field :length, class:"form-control" %>
+            <%= f.text_field :length, class:"form-control", value:@trip.length %>
         </div>
         <div class="form-group">
             <%= f.label "location" %>
-            <%= f.text_field :location, class:"form-control" %>
+            <%= f.text_field :location, class:"form-control", value:@trip.location %>
         </div>
 
         <%= f.submit :submit, class:"btn btn-default" %>
