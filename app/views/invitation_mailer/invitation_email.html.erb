@@ -17,6 +17,6 @@
       </p>
     <% end %>
 
-    <%= link_to "Join #{@invitation.trip.location}", trip_invitation_path(@invitation.trip, @invitation) %>
+    <%= link_to "Join #{@invitation.trip.location}", trip_invitation_url(@invitation.trip, @invitation) %>
   </body>
 </html>
