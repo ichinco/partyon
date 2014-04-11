@@ -16,3 +16,4 @@
 //= require_tree .
 //= require bootstrap
 //= require bootstrap-timepicker
+//= require bootstrap-datepicker
