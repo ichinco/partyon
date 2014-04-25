@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409220431) do
+ActiveRecord::Schema.define(version: 20140425215914) do
 
   create_table "activities", force: true do |t|
     t.string   "name"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 20140409220431) do
 
   add_index "comments", ["activity_id"], name: "index_comments_on_activity_id"
 
+  create_table "cost_users", force: true do |t|
+    t.integer  "cost_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cost_users", ["cost_id"], name: "index_cost_users_on_cost_id"
+  add_index "cost_users", ["user_id"], name: "index_cost_users_on_user_id"
+
   create_table "costs", force: true do |t|
     t.integer  "activity_id"
     t.integer  "estimated_amount"
@@ -42,10 +52,12 @@ ActiveRecord::Schema.define(version: 20140409220431) do
     t.datetime "updated_at"
     t.string   "description"
     t.integer  "trip_id"
+    t.integer  "user_id"
   end
 
   add_index "costs", ["activity_id"], name: "index_costs_on_activity_id"
   add_index "costs", ["trip_id"], name: "index_costs_on_trip_id"
+  add_index "costs", ["user_id"], name: "index_costs_on_user_id"
 
   create_table "events", force: true do |t|
     t.integer  "user_id"

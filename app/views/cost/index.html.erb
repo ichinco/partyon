@@ -9,8 +9,9 @@
         <thead>
             <tr>
                 <th>Activity/Description</th>
-                <th>Estimated Cost per person</th>
-                <th>Actual Cost per person</th>
+                <th>Paid by</th>
+                <th>Total Cost</th>
+                <th>Who owes</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,9 @@
                     <% end %>
                 </td>
                 <td>
-                    <%= cost.estimated_amount %>
+                    <% unless cost.user.nil? %>
+                        <%= cost.user.name %>
+                    <% end %>
                 </td>
                 <td>
                     <% if @is_user_admin %>
@@ -42,15 +45,25 @@
                         <% end %>
                     <% end %>
                 </td>
+                <td>
+                    <ul>
+                        <% cost_users = cost.cost_users.collect do |cu| cu.user end %>
+                        <% cost.cost_users.each do |u| %>
+                            <%= link_to u.user.name, trip_cost_cost_user_path(@trip, cost, u), method: :delete %>
+                        <% end %>
+
+                        <% @trip_users.each do |tr| %>
+                            <% unless tr.user.in? cost_users %>
+                                <%= form_for :cost_user, url:trip_cost_cost_user_index_path(@trip, cost) do |f| %>
+                                    <%= f.hidden_field :user_id, value: tr.user.id %>
+                                    <%= f.submit tr.user.name, :class=>"btn btn-primary" %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </ul>
+                </td>
             </tr>
         <% end %>
         </tbody>
-        <tfoot>
-            <tr>
-                <td>Total</td>
-                <td></td>
-                <td><%= @total %></td>
-            </tr>
-        </tfoot>
     </table>
 </div>

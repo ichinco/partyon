@@ -13,9 +13,17 @@ class CostController < ApplicationController
   def create
     @cost = Cost.new(cost_parameters)
     @cost.trip = @trip
+    @cost.user = current_user
 
     add_event(current_user, @trip, "#{current_user.name} says that #{@cost.description} will cost #{@cost.actual_amount}")
     if @cost.save
+      @trip_users = TripUser.where(:trip_id => @trip.id)
+      @trip_users.each do |u|
+        @cost_user = CostUser.new()
+        @cost_user.cost = @cost
+        @cost_user.user = u
+        @cost_user.save
+      end
       redirect_to trip_cost_index_path(@trip)
     else
       flash[:alert] = "#{pluralize(@cost.errors.count,"error")} prevented this cost from being created."
@@ -25,6 +33,7 @@ class CostController < ApplicationController
 
   def index
     @costs = Cost.where(trip_id: @trip.id)
+    @trip_users = TripUser.where(trip_id:@trip.id)
     @total = @costs.inject(0) do |sum, cost|
       if not cost.actual_amount.nil?
         sum + cost.actual_amount
