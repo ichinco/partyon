@@ -5,7 +5,7 @@
         <li class="<%= params[:controller] == "activity" ? "active" : "" %>"><%= link_to "Activities", trip_activity_index_path(trip.id) %></li>
         <li class="<%= params[:controller] == "schedule" ? "active" : "" %>"><%= link_to "Schedule", trip_schedule_index_path(trip.id) %></li>
         <li class="<%= params[:controller] == "cost" ? "active" : "" %>"><%= link_to "Costs", trip_cost_index_path(trip.id) %></li>
-        <li class="<%= params[:controller] == "reimbursements" ? "active" : "" %>"><%= link_to "Reimbursements", trip_cost_index_path(trip.id) %></li>
+        <li class="<%= params[:controller] == "reimbursements" ? "active" : "" %>"><%= link_to "Reimbursements", trip_reimbursement_index_path(trip.id) %></li>
         <li class="<%= params[:controller] == "poll" ? "active" : "" %>"><%= link_to "Polls", trip_poll_index_path(trip.id) %></li>
     </ul>
 </div>

@@ -1,0 +1,56 @@
+<%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
+
+<div class="container">
+    <h1>Reimbursements</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Guests</th>
+                <th>In</th>
+                <th>Out</th>
+                <th>Owe</th>
+                <th>Am Owed</th>
+                <th>Paid</th>
+                <th>Set paid</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @trip_users.each do |u| %>
+                <%
+                   paid = 0
+                   @paid.each do |cost|
+                    cost.cost_users.each do |cu|
+                        if cu.user.id == u.user.id
+                            paid += cost.actual_amount / cost.cost_users.count
+                        end
+                    end
+                   end
+
+                   owe = 0
+                   @owe.each do |cost_user|
+                    if cost_user.cost.user.id == u.user.id
+                        owe += cost_user.cost.actual_amount / cost_user.cost.cost_users.count
+                    end
+                   end
+                %>
+                <tr>
+                    <td><%= u.user.name %></td>
+                    <td><%= paid %></td>
+                    <td><%= owe %></td>
+                    <td>
+                        <% if owe > paid %>
+                            <%= owe - paid %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if paid > owe %>
+                            <%= paid - owe %>
+                        <% end %>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
