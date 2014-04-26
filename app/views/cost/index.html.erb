@@ -46,11 +46,11 @@
                     <% end %>
                 </td>
                 <td>
-                    <% cost_users = cost.cost_users.collect do |cu| cu.user end %>
+                    <% cost_users = cost.cost_users.collect do |cu| cu.user.id end %>
 
                     <select class="multiselect" multiple="multiple" data-cost-id="<%= cost.id %>" data-url="<%= url_for trip_cost_cost_user_index_path(@trip, cost) %>">
                         <% @trip_users.each do |tr| %>
-                            <option value="<%= tr.user.id %>" <%= (tr.user.in? cost_users) ? "selected" : "" %>><%= tr.user.name %></option>
+                            <option value="<%= tr.user.id %>" <%= (tr.user.id.in? cost_users) ? "selected" : "" %>><%= tr.user.name %></option>
                         <% end %>
                     </select>
                 </td>

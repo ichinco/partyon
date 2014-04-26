@@ -13,7 +13,6 @@ costMultiselectChange = (element, checked) ->
   })
 
 generateButtonText = (options, select ) ->
-  console.log(select.context.options)
   if (options.length == 0)
     return "None" + ' <b class="caret"></b>'
   else if (options.length == select.context.options.length - 1)
@@ -32,7 +31,7 @@ multiselectReady = () ->
   $('.multiselect').multiselect({
     includeSelectAllOption:true,
     selectAllText: "Everyone",
-    selectAllValue:"multiselect-all",
+    selectAllValue:"0",
     onChange: costMultiselectChange,
     buttonText : generateButtonText
   });
