@@ -12,12 +12,29 @@ costMultiselectChange = (element, checked) ->
     }
   })
 
+generateButtonText = (options, select ) ->
+  console.log(select.context.options)
+  if (options.length == 0)
+    return "None" + ' <b class="caret"></b>'
+  else if (options.length == select.context.options.length - 1)
+    return "Everyone" + ' <b class="caret"></b>'
+  else
+    selected = [];
+    options.each(() ->
+      label = if ($(this).attr('label') != undefined) then $(this).attr('label') else $(this).html()
+
+      selected.push label;
+    )
+
+    return selected.join(", ") + ' <b class="caret"></b>'
+
 multiselectReady = () ->
   $('.multiselect').multiselect({
     includeSelectAllOption:true,
     selectAllText: "Everyone",
-    selectAllValue:"multiselect-all"
-    onChange: costMultiselectChange
+    selectAllValue:"multiselect-all",
+    onChange: costMultiselectChange,
+    buttonText : generateButtonText
   });
 
 $(document).ready(multiselectReady)
