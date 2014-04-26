@@ -46,21 +46,13 @@
                     <% end %>
                 </td>
                 <td>
-                    <ul>
-                        <% cost_users = cost.cost_users.collect do |cu| cu.user end %>
-                        <% cost.cost_users.each do |u| %>
-                            <%= link_to u.user.name, trip_cost_cost_user_path(@trip, cost, u), method: :delete %>
-                        <% end %>
+                    <% cost_users = cost.cost_users.collect do |cu| cu.user end %>
 
+                    <select class="multiselect" multiple="multiple">
                         <% @trip_users.each do |tr| %>
-                            <% unless tr.user.in? cost_users %>
-                                <%= form_for :cost_user, url:trip_cost_cost_user_index_path(@trip, cost) do |f| %>
-                                    <%= f.hidden_field :user_id, value: tr.user.id %>
-                                    <%= f.submit tr.user.name, :class=>"btn btn-primary" %>
-                                <% end %>
-                            <% end %>
+                            <option value="<%= tr.user.id %>"><%= tr.user.name %></option>
                         <% end %>
-                    </ul>
+                    </select>
                 </td>
             </tr>
         <% end %>

@@ -58,3 +58,5 @@ gem 'bootstrap-timepicker-rails'
 gem 'mandrill-api'
 
 gem 'bootstrap-datepicker-rails'
+
+gem 'bootstrap-multiselect-rails'

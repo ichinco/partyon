@@ -17,3 +17,4 @@
 //= require bootstrap
 //= require bootstrap-timepicker
 //= require bootstrap-datepicker
+//= require bootstrap-multiselect

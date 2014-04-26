@@ -1,5 +1,7 @@
 <%= render partial:"layouts/trip_nav", locals:{trip: @trip} %>
 
+<% total_to_pay = 0 %>
+<% total_due = 0 %>
 <div class="container">
     <h1>Reimbursements</h1>
     <table class="table">
@@ -25,6 +27,7 @@
                         end
                     end
                    end
+                   total_due += paid
 
                    owe = 0
                    @owe.each do |cost_user|
@@ -32,11 +35,32 @@
                         owe += cost_user.cost.actual_amount / cost_user.cost.cost_users.count
                     end
                    end
+                   total_to_pay += owe
                 %>
                 <tr>
                     <td><%= u.user.name %></td>
-                    <td><%= paid %></td>
-                    <td><%= owe %></td>
+                    <td>
+                        <%= paid %>
+                        <button type="button" class="btn btn-default tooltip" data-toggle="popover" data-placement="top"
+                                data-content="                            <%
+                                                               @paid.each do |cost|
+                                                                cost.cost_users.each do |cu|
+                                                                    if cu.user.id == u.user.id %>
+                                                            <%= cost.actual_amount / cost.cost_users.count %>
+                                                            <%= cost.description %>
+                                                             <%     end
+                                                                end
+                                                               end
+                                                            %>">
+                        ?
+                        </button>
+                    </td>
+                    <td>
+                        <%= owe %>
+                        <button type="button" class="btn btn-default tooltip" data-toggle="popover" data-placement="top" data-content="?">
+                        ?
+                        </button>
+                    </td>
                     <td>
                         <% if owe > paid %>
                             <%= owe - paid %>
@@ -52,5 +76,10 @@
                 </tr>
             <% end %>
         </tbody>
+        <tfoot>
+            <tr>
+
+            </tr>
+        </tfoot>
     </table>
 </div>
