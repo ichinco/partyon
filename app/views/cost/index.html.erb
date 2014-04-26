@@ -50,7 +50,7 @@
 
                     <select class="multiselect" multiple="multiple">
                         <% @trip_users.each do |tr| %>
-                            <option value="<%= tr.user.id %>"><%= tr.user.name %></option>
+                            <option value="<%= tr.user.id %>" <%= (tr.user.in? cost_users) ? "selected" : "" %>><%= tr.user.name %></option>
                         <% end %>
                     </select>
                 </td>
