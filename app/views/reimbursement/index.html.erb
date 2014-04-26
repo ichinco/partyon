@@ -22,7 +22,7 @@
                    paid = 0
                    @paid.each do |cost|
                     cost.cost_users.each do |cu|
-                        if cu.user.id == u.user.id
+                        if cu.user.id == u.user.id && cost.actual_amount.present?
                             paid += cost.actual_amount / cost.cost_users.count
                         end
                     end
@@ -31,7 +31,7 @@
 
                    owe = 0
                    @owe.each do |cost_user|
-                    if cost_user.cost.user.id == u.user.id
+                    if cost_user.cost.user.id == u.user.id && cost_user.cost.actual_amount.present?
                         owe += cost_user.cost.actual_amount / cost_user.cost.cost_users.count
                     end
                    end
@@ -45,7 +45,7 @@
                                 data-content="                            <%
                                                                @paid.each do |cost|
                                                                 cost.cost_users.each do |cu|
-                                                                    if cu.user.id == u.user.id %>
+                                                                    if cu.user.id == u.user.id && cost.actual_amount.present? %>
                                                             <%= cost.actual_amount / cost.cost_users.count %>
                                                             <%= cost.description %>
                                                              <%     end
