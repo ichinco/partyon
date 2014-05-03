@@ -30,7 +30,8 @@ class CostUserController < ApplicationController
       @cost_user.trip_id = trip_id
       @successful = @cost_user.save
     else
-      @cost_user = CostUser.where(:cost_id=> params[:cost_id], :trip_id=>params[:trip_id])
+      @cost_user = CostUser.where(:cost_id=> cost_id, :user_id=>user_id)
+      @successful = true
       @cost_user.each do |u|
         @successful = @successful && u.destroy
       end
