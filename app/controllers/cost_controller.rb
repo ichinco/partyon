@@ -21,7 +21,7 @@ class CostController < ApplicationController
       @trip_users.each do |u|
         @cost_user = CostUser.new()
         @cost_user.cost = @cost
-        @cost_user.user = u
+        @cost_user.user = u.user
         @cost_user.save
       end
       redirect_to trip_cost_index_path(@trip)
